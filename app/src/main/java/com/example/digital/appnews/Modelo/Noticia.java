@@ -22,12 +22,6 @@ public class Noticia {
         this.title = title;
         this.description = description;
         this.url = url;
-        if(urlToImage.startsWith("//")){
-            urlToImage = "http:"+urlToImage;
-        }
-        if(urlToImage.equals("null")){
-            urlToImage="https://desaku636.files.wordpress.com/2017/05/ilustrasi-koran.jpg?w=693&h=312&crop=1";
-        }
         this.urlToImage = urlToImage;
         this.publishedAt = publishedAt;
         this.content = content;

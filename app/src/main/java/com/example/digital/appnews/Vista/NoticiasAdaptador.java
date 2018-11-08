@@ -86,7 +86,6 @@ public class NoticiasAdaptador extends RecyclerView.Adapter {
 
             imageViewFoto = itemView.findViewById(R.id.imageViewFoto);
             textViewTitulo = itemView.findViewById(R.id.textViewTitulo);
-            //textViewDescripcion = itemView.findViewById(R.id.textViewDescripcion);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -98,7 +97,14 @@ public class NoticiasAdaptador extends RecyclerView.Adapter {
 
         public void bind(Noticia noticia){
 
-            Picasso.with(context).load(noticia.getUrlToImagen()).into(imageViewFoto);
+            if(noticia.getUrlToImagen()==null){
+                imageViewFoto.setImageResource(R.drawable.news);
+            }else{
+                if(noticia.getUrlToImagen().startsWith("//")){
+                    noticia.setUrlToImagen("http:"+noticia.getUrlToImagen());
+                }
+                Picasso.with(context).load(noticia.getUrlToImagen()).into(imageViewFoto);
+            }
 
             textViewTitulo.setText(noticia.getTitle());
         }
