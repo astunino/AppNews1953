@@ -10,10 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageButton;
-import android.widget.Toolbar;
 
 import com.example.digital.appnews.R;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbarId);
+        
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottomNavigationViewId);
@@ -72,5 +74,16 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
 
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        return true;
     }
 }
