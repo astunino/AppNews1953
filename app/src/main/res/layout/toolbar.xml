@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
     app:title="Noticias"
-    android:background="#FFFFFF"
+    android:background="#eeeeee"
     app:subtitleTextColor="#000000"
     android:elevation="4dp">
 </android.support.v7.widget.Toolbar>
