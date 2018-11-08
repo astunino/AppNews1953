@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">AppNews</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="favoritos">Mis noticias favoritas</string>
+</resources>

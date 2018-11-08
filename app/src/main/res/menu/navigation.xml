@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_inicio"
+        android:icon="@drawable/inicio"
+        android:title="Inicio"/>
+
+    <item
+        android:id="@+id/navigation_favorito"
+        android:icon="@drawable/health"
+        android:title="Favoritos"/>
+
+
+</menu>
