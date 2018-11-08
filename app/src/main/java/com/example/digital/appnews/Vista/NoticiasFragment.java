@@ -39,6 +39,7 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
     private ArrayList<Noticia> noticias = new ArrayList<>();
     private RecyclerView recyclerViewNoticias;
     private NoticiasAdaptador adaptador;
+    private Integer categoria=0;
 
     public static final String KEY_TODO = "0";
     public static final String KEY_BUSINESS = "1";
@@ -87,6 +88,8 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
                 imageButtonSports.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonTechnology.setBackgroundColor(Color.TRANSPARENT);
 
+                categoria=1;
+
                 Controlador controlador = new Controlador(KEY_BUSINESS);
                 controlador.obtenerNoticias(new ResultListener<ArrayList<Noticia>>() {
                     @Override
@@ -107,6 +110,8 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
                 imageButtonScience.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonSports.setBackgroundColor(getResources().getColor(R.color.selected));
                 imageButtonTechnology.setBackgroundColor(Color.TRANSPARENT);
+
+                categoria=2;
 
                 Controlador controlador = new Controlador(KEY_SPORTS);
                 controlador.obtenerNoticias(new ResultListener<ArrayList<Noticia>>() {
@@ -129,6 +134,8 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
                 imageButtonSports.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonTechnology.setBackgroundColor(Color.TRANSPARENT);
 
+                categoria=3;
+
                 Controlador controlador = new Controlador(KEY_SCIENCE);
                 controlador.obtenerNoticias(new ResultListener<ArrayList<Noticia>>() {
                     @Override
@@ -149,6 +156,8 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
                 imageButtonScience.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonSports.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonTechnology.setBackgroundColor(Color.TRANSPARENT);
+
+                categoria=4;
 
                 Controlador controlador = new Controlador(KEY_ENTERTAINMENT);
                 controlador.obtenerNoticias(new ResultListener<ArrayList<Noticia>>() {
@@ -171,6 +180,8 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
                 imageButtonSports.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonTechnology.setBackgroundColor(getResources().getColor(R.color.selected));
 
+                categoria=5;
+
                 Controlador controlador = new Controlador(KEY_TECHNOLOGY);
                 controlador.obtenerNoticias(new ResultListener<ArrayList<Noticia>>() {
                     @Override
@@ -192,6 +203,7 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
                 imageButtonSports.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonTechnology.setBackgroundColor(Color.TRANSPARENT);
 
+                categoria=6;
 
                 Controlador controlador = new Controlador(KEY_HEALTH);
                 controlador.obtenerNoticias(new ResultListener<ArrayList<Noticia>>() {
@@ -211,16 +223,16 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
 
         recyclerViewNoticias.setHasFixedSize(true);
 
-        adaptador = new NoticiasAdaptador(getActivity(),this, noticias);
+        adaptador = new NoticiasAdaptador(getActivity(),this, noticias,categoria);
         recyclerViewNoticias.setAdapter(adaptador);
         recyclerViewNoticias.setLayoutManager(layoutManager);
     }
 
     @Override
-    public void irDetalle(String titulo) {
+    public void irDetalle(String titulo,Integer categoria) {
         Context context = getContext();
         NoticiasAdaptador.AdapterListener listener = (NoticiasAdaptador.AdapterListener) context;
 
-        listener.irDetalle(titulo);
+        listener.irDetalle(titulo,categoria);
     }
 }

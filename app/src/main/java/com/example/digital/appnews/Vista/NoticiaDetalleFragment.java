@@ -22,6 +22,8 @@ public class NoticiaDetalleFragment extends Fragment {
 
     public static final String KEY_URL = "url";
     public static final String KEY_TITULO = "title";
+    public static final String KEY_CATEGORIA = "categoria";
+
 
     public static NoticiaDetalleFragment fabrica(Noticia dato){
         NoticiaDetalleFragment fragment = new NoticiaDetalleFragment();

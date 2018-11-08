@@ -8,19 +8,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.digital.appnews.R;
 
 public class MainActivity extends AppCompatActivity implements NoticiasAdaptador.AdapterListener {
-
-    private RecyclerView recyclerViewCategorias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbarId);
-        
+        setSupportActionBar(toolbar);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottomNavigationViewId);
@@ -63,14 +59,13 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
     }
 
     @Override
-    public void irDetalle(String titulo){
-        //public void irDetalle(){
+    public void irDetalle(String titulo,Integer categoria){
 
         Intent intent = new Intent(MainActivity.this, DetalleActivity.class);
 
         Bundle bundle = new Bundle();
-        //bundle.putString(NoticiaDetalleFragment.KEY_TITULO, titulo);
-        bundle.putString(NoticiaDetalleFragment.KEY_TITULO, "titulo");
+        bundle.putString(NoticiaDetalleFragment.KEY_TITULO, titulo);
+        bundle.putInt(NoticiaDetalleFragment.KEY_CATEGORIA, categoria);
 
         intent.putExtras(bundle);
         startActivity(intent);
@@ -83,7 +78,11 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
-
-        return true;
+        switch (item.getItemId()) {
+            case R.id.app_bar_search:
+                Toast.makeText(getApplicationContext(),"QUE PASO",Toast.LENGTH_LONG).show();
+                return true;
+        }
+        return false;
     }
 }

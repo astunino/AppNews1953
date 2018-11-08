@@ -16,6 +16,7 @@ public class DetalleActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private String titulo;
+    private Integer categoria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +27,15 @@ public class DetalleActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
 
         titulo = bundle.getString(NoticiaDetalleFragment.KEY_TITULO);
+        categoria = bundle.getInt(NoticiaDetalleFragment.KEY_CATEGORIA);
 
         viewPager = findViewById(R.id.viewPager);
 
         ArrayList<Noticia> noticias = new ArrayList<>();
 
-        Controlador controlador = new Controlador(NoticiasFragment.KEY_TODO);
+        Controlador controlador = new Controlador(String.valueOf(categoria));
+
+
         controlador.obtenerNoticias(new ResultListener<ArrayList<Noticia>>() {
             @Override
             public void finish(ArrayList<Noticia> noticias) {

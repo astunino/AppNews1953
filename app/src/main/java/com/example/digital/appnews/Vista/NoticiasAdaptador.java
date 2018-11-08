@@ -28,11 +28,13 @@ public class NoticiasAdaptador extends RecyclerView.Adapter {
     private NoticiaReceptor noticiaReceptor;
     private Context context;
     private AdapterListener listener;
+    private Integer categoria;
 
-    public NoticiasAdaptador(Context context, AdapterListener listener, ArrayList<Noticia> noticias) {
+    public NoticiasAdaptador(Context context, AdapterListener listener, ArrayList<Noticia> noticias,Integer categoria) {
         this.context = context;
         this.listener = listener;
         this.noticias = noticias;
+        this.categoria = categoria;
     }
 
     @NonNull
@@ -70,7 +72,7 @@ public class NoticiasAdaptador extends RecyclerView.Adapter {
     }
 
     public interface AdapterListener{
-        void irDetalle(String nombre);
+        void irDetalle(String nombre,Integer categoria);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -89,7 +91,7 @@ public class NoticiasAdaptador extends RecyclerView.Adapter {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.irDetalle(noticias.get(getAdapterPosition()).getTitle());
+                    listener.irDetalle(noticias.get(getAdapterPosition()).getTitle(),categoria);
                 }
             });
         }
@@ -99,7 +101,6 @@ public class NoticiasAdaptador extends RecyclerView.Adapter {
             Picasso.with(context).load(noticia.getUrlToImagen()).into(imageViewFoto);
 
             textViewTitulo.setText(noticia.getTitle());
-            //textViewDescripcion.setText(noticia.getDescription());
         }
 
     }
