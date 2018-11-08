@@ -2,9 +2,6 @@ package com.example.digital.appnews.Vista;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,14 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.digital.appnews.Modelo.Noticia;
 import com.example.digital.appnews.R;
-import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 public class NoticiasAdaptador extends RecyclerView.Adapter {
 
@@ -103,7 +97,7 @@ public class NoticiasAdaptador extends RecyclerView.Adapter {
                 if(noticia.getUrlToImagen().startsWith("//")){
                     noticia.setUrlToImagen("http:"+noticia.getUrlToImagen());
                 }
-                Picasso.with(context).load(noticia.getUrlToImagen()).into(imageViewFoto);
+                Glide.with(context).load(noticia.getUrlToImagen()).into(imageViewFoto);
             }
 
             textViewTitulo.setText(noticia.getTitle());
