@@ -11,6 +11,6 @@
         android:text="@string/favoritos"
         android:textSize="42sp"
         android:gravity="center"
-        android:background="@drawable/background" />
+        android:background="#eeeeee" />
 
 </FrameLayout>
