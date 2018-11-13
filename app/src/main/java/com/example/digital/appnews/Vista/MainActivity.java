@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
             case R.id.app_bar_search:
-                Toast.makeText(getApplicationContext(),"QUE PASO",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"QUE PASO eh",Toast.LENGTH_LONG).show();
                 return true;
         }
         return false;
