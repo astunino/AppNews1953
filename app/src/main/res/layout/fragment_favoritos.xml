@@ -1,24 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".Vista.FavoritosFragment">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="100dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:text="No Hay Favoritos"
+        android:textColor="#dc000000"
+        android:textSize="40sp" />
 
     <com.airbnb.lottie.LottieAnimationView
 
         android:id="@+id/animation_view"
+        android:layout_width="300dp"
+
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="40dp"
 
-        android:layout_gravity="center"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="animacionFavoritos.json"
 
         app:lottie_imageAssetsFolder="assets"
-        app:lottie_autoPlay="true"
-
-        app:lottie_fileName="animacionFavoritos.json"
-        app:lottie_loop="true"
-        />
-</FrameLayout>
+        app:lottie_loop="true" />
+</LinearLayout>
