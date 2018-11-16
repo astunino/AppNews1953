@@ -4,7 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="selected">#9879b79f</color>
-    <color name="selectedNavigationBottom">#067147</color>
-
+    <color name="selectedNavigationBottom">#6B38FB</color>
 
 </resources>

@@ -11,7 +11,9 @@
         android:icon="@drawable/ic_favorite"
         android:title="Favoritos"/>
 
-
-
+    <item
+        android:id="@+id/navigation_login"
+        android:icon="@drawable/ic_favorite"
+        android:title="Mi cuenta"/>
 
 </menu>

@@ -92,7 +92,7 @@ public class NoticiasAdaptador extends RecyclerView.Adapter {
         public void bind(Noticia noticia){
 
             if(noticia.getUrlToImagen()==null){
-                imageViewFoto.setImageResource(R.drawable.news);
+                imageViewFoto.setImageResource(R.drawable.no_image);
             }else{
                 if(noticia.getUrlToImagen().startsWith("//")){
                     noticia.setUrlToImagen("http:"+noticia.getUrlToImagen());

@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">AppNews</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="favoritos">Mis noticias favoritas</string>
+    <string name="nohayfavoritos">No hay favoritos</string>
+    <string name="sports">Sports</string>
+    <string name="technology">Technology</string>
+    <string name="science">Science</string>
+    <string name="business">Business</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="health">Health</string>
+
+
 </resources>

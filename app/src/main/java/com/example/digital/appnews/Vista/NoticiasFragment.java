@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.digital.appnews.Controlador.Controlador;
 import com.example.digital.appnews.Modelo.Noticia;
@@ -52,7 +53,7 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
 
         recyclerViewNoticias = view.findViewById(R.id.recyclerViewNoticias);
 
-        final ImageButton imageButtonBussines = view.findViewById(R.id.imageButtonBussines);
+        final ImageButton imageButtonBusiness = view.findViewById(R.id.imageButtonBusiness);
         final ImageButton imageButtonSports = view.findViewById(R.id.imageButtonSports);
         final ImageButton imageButtonScience = view.findViewById(R.id.imageButtonScience);
         final ImageButton imageButtonEntertainment = view.findViewById(R.id.imageButtonEntertainment);
@@ -67,11 +68,11 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
             }
         });
 
-        imageButtonBussines.setOnClickListener(new View.OnClickListener() {
+        imageButtonBusiness.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                imageButtonBussines.setBackgroundColor(getResources().getColor(R.color.selected));
+                imageButtonBusiness.setBackgroundColor(getResources().getColor(R.color.selected));
                 imageButtonEntertainment.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonHealth.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonScience.setBackgroundColor(Color.TRANSPARENT);
@@ -94,7 +95,7 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
             @Override
             public void onClick(View view) {
 
-                imageButtonBussines.setBackgroundColor(Color.TRANSPARENT);
+                imageButtonBusiness.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonEntertainment.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonHealth.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonScience.setBackgroundColor(Color.TRANSPARENT);
@@ -117,7 +118,7 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
             @Override
             public void onClick(View view) {
 
-                imageButtonBussines.setBackgroundColor(Color.TRANSPARENT);
+                imageButtonBusiness.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonEntertainment.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonHealth.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonScience.setBackgroundColor(getResources().getColor(R.color.selected));
@@ -140,7 +141,7 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
             @Override
             public void onClick(View view) {
 
-                imageButtonBussines.setBackgroundColor(Color.TRANSPARENT);
+                imageButtonBusiness.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonEntertainment.setBackgroundColor(getResources().getColor(R.color.selected));
                 imageButtonHealth.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonScience.setBackgroundColor(Color.TRANSPARENT);
@@ -163,7 +164,7 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
             @Override
             public void onClick(View view) {
 
-                imageButtonBussines.setBackgroundColor(Color.TRANSPARENT);
+                imageButtonBusiness.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonEntertainment.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonHealth.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonScience.setBackgroundColor(Color.TRANSPARENT);
@@ -186,7 +187,7 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
             @Override
             public void onClick(View view) {
 
-                imageButtonBussines.setBackgroundColor(Color.TRANSPARENT);
+                imageButtonBusiness.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonEntertainment.setBackgroundColor(Color.TRANSPARENT);
                 imageButtonHealth.setBackgroundColor(getResources().getColor(R.color.selected));
                 imageButtonScience.setBackgroundColor(Color.TRANSPARENT);
