@@ -24,13 +24,13 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NoticiasFragment extends Fragment implements NoticiasAdaptador.AdapterListener{
+public class NoticiasFragment extends Fragment implements NoticiasAdaptador.AdapterListener {
 
     private String TAG = MainActivity.class.getSimpleName();
     private ArrayList<Noticia> noticias = new ArrayList<>();
     private RecyclerView recyclerViewNoticias;
     private NoticiasAdaptador adaptador;
-    private Integer categoria=0;
+    private Integer categoria = 0;
 
     public static final String KEY_TODO = "0";
     public static final String KEY_BUSINESS = "1";
@@ -39,6 +39,7 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
     public static final String KEY_ENTERTAINMENT = "4";
     public static final String KEY_TECHNOLOGY = "5";
     public static final String KEY_HEALTH = "6";
+    public static final String KEY_CATEGORIA = "categoria";
 
     public NoticiasFragment() {
         // Required empty public constructor
@@ -48,182 +49,80 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //Obtengo el Bundle
+        Bundle bundle = getArguments();
+
+        //Obtengo los datos del Bundle
+        categoria = bundle.getInt(KEY_CATEGORIA);
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_noticias, container, false);
-
+        //Obtengo el Recycler View del layout
         recyclerViewNoticias = view.findViewById(R.id.recyclerViewNoticias);
 
-        final ImageButton imageButtonBusiness = view.findViewById(R.id.imageButtonBusiness);
-        final ImageButton imageButtonSports = view.findViewById(R.id.imageButtonSports);
-        final ImageButton imageButtonScience = view.findViewById(R.id.imageButtonScience);
-        final ImageButton imageButtonEntertainment = view.findViewById(R.id.imageButtonEntertainment);
-        final ImageButton imageButtonTechnology = view.findViewById(R.id.imageButtonTechnology);
-        final ImageButton imageButtonHealth = view.findViewById(R.id.imageButtonHealth);
-
+        //Genero una instancia del controlador y lo inicializo con todas las noticias (por defecto, sin filtros)
         Controlador controlador = new Controlador(KEY_TODO);
+
+        //"sobreescribo" la instancia del controlador de acuerdo a la categoría que me pasaron por el bundle
+        switch (categoria) {
+            case 0:
+                controlador = new Controlador(KEY_TODO);
+                break;
+            case 1:
+                controlador = new Controlador(KEY_BUSINESS);
+                break;
+            case 2:
+                controlador = new Controlador(KEY_SPORTS);
+                break;
+            case 3:
+                controlador = new Controlador(KEY_SCIENCE);
+                break;
+            case 4:
+                controlador = new Controlador(KEY_ENTERTAINMENT);
+                break;
+            case 5:
+                controlador = new Controlador(KEY_TECHNOLOGY);
+                break;
+            case 6:
+                controlador = new Controlador(KEY_HEALTH);
+                break;
+        }
+
         controlador.obtenerNoticias(new ResultListener<ArrayList<Noticia>>() {
             @Override
             public void finish(ArrayList<Noticia> noticias) {
                 traerDatos(noticias);
             }
         });
-
-        imageButtonBusiness.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                imageButtonBusiness.setBackgroundColor(getResources().getColor(R.color.selected));
-                imageButtonEntertainment.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonHealth.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonScience.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonSports.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonTechnology.setBackgroundColor(Color.TRANSPARENT);
-
-                categoria=1;
-
-                Controlador controlador = new Controlador(KEY_BUSINESS);
-                controlador.obtenerNoticias(new ResultListener<ArrayList<Noticia>>() {
-                    @Override
-                    public void finish(ArrayList<Noticia> noticias) {
-                        traerDatos(noticias);
-                    }
-                });
-            }
-        });
-
-        imageButtonSports.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                imageButtonBusiness.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonEntertainment.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonHealth.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonScience.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonSports.setBackgroundColor(getResources().getColor(R.color.selected));
-                imageButtonTechnology.setBackgroundColor(Color.TRANSPARENT);
-
-                categoria=2;
-
-                Controlador controlador = new Controlador(KEY_SPORTS);
-                controlador.obtenerNoticias(new ResultListener<ArrayList<Noticia>>() {
-                    @Override
-                    public void finish(ArrayList<Noticia> noticias) {
-                        traerDatos(noticias);
-                    }
-                });
-            }
-        });
-
-        imageButtonScience.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                imageButtonBusiness.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonEntertainment.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonHealth.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonScience.setBackgroundColor(getResources().getColor(R.color.selected));
-                imageButtonSports.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonTechnology.setBackgroundColor(Color.TRANSPARENT);
-
-                categoria=3;
-
-                Controlador controlador = new Controlador(KEY_SCIENCE);
-                controlador.obtenerNoticias(new ResultListener<ArrayList<Noticia>>() {
-                    @Override
-                    public void finish(ArrayList<Noticia> noticias) {
-                        traerDatos(noticias);
-                    }
-                });
-            }
-        });
-
-        imageButtonEntertainment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                imageButtonBusiness.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonEntertainment.setBackgroundColor(getResources().getColor(R.color.selected));
-                imageButtonHealth.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonScience.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonSports.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonTechnology.setBackgroundColor(Color.TRANSPARENT);
-
-                categoria=4;
-
-                Controlador controlador = new Controlador(KEY_ENTERTAINMENT);
-                controlador.obtenerNoticias(new ResultListener<ArrayList<Noticia>>() {
-                    @Override
-                    public void finish(ArrayList<Noticia> noticias) {
-                        traerDatos(noticias);
-                    }
-                });
-            }
-        });
-
-        imageButtonTechnology.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                imageButtonBusiness.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonEntertainment.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonHealth.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonScience.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonSports.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonTechnology.setBackgroundColor(getResources().getColor(R.color.selected));
-
-                categoria=5;
-
-                Controlador controlador = new Controlador(KEY_TECHNOLOGY);
-                controlador.obtenerNoticias(new ResultListener<ArrayList<Noticia>>() {
-                    @Override
-                    public void finish(ArrayList<Noticia> noticias) {
-                        traerDatos(noticias);
-                    }
-                });
-            }
-        });
-
-        imageButtonHealth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                imageButtonBusiness.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonEntertainment.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonHealth.setBackgroundColor(getResources().getColor(R.color.selected));
-                imageButtonScience.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonSports.setBackgroundColor(Color.TRANSPARENT);
-                imageButtonTechnology.setBackgroundColor(Color.TRANSPARENT);
-
-                categoria=6;
-
-                Controlador controlador = new Controlador(KEY_HEALTH);
-                controlador.obtenerNoticias(new ResultListener<ArrayList<Noticia>>() {
-                    @Override
-                    public void finish(ArrayList<Noticia> noticias) {
-                        traerDatos(noticias);
-                    }
-                });
-            }
-        });
         return view;
     }
 
-    public void traerDatos(ArrayList<Noticia> noticias){
+    public void traerDatos(ArrayList<Noticia> noticias) {
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
         recyclerViewNoticias.setHasFixedSize(true);
 
-        adaptador = new NoticiasAdaptador(getActivity(),this, noticias,categoria);
+        adaptador = new NoticiasAdaptador(getActivity(), this, noticias, categoria);
         recyclerViewNoticias.setAdapter(adaptador);
         recyclerViewNoticias.setLayoutManager(layoutManager);
     }
 
     @Override
-    public void irDetalle(String titulo,Integer categoria) {
+    public void irDetalle(String titulo, Integer categoria) {
         Context context = getContext();
         NoticiasAdaptador.AdapterListener listener = (NoticiasAdaptador.AdapterListener) context;
 
-        listener.irDetalle(titulo,categoria);
+        listener.irDetalle(titulo, categoria);
+    }
+
+
+    //Este método me "fabrica" un NoticiasFragment filtrado por la categoría que se le pasa por argumento
+    public static NoticiasFragment noticiasFragment(Integer categoria) {
+        NoticiasFragment fragment = new NoticiasFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(NoticiasFragment.KEY_CATEGORIA, categoria);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 }

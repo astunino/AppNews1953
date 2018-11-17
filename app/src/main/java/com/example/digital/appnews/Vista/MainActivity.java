@@ -3,9 +3,11 @@ package com.example.digital.appnews.Vista;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.digital.appnews.Modelo.ViewPagerAdapterMain;
 import com.example.digital.appnews.R;
 
 public class MainActivity extends AppCompatActivity implements NoticiasAdaptador.AdapterListener {
@@ -42,24 +45,39 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
                                 selectedFragment = new FavoritosFragment();
                                 break;
                         }
-                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        /*FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.idContainer, selectedFragment);
-                        transaction.commit();
+                        transaction.commit();*/
                         return true;
                     }
                 });
 
 
-        NoticiasFragment noticiasFragment = new NoticiasFragment();
+       /* NoticiasFragment noticiasFragment = new NoticiasFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.idContainer, noticiasFragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
+
+        //Busco el ViewPager en el Layout
+        ViewPager mainViewPager = findViewById(R.id.mainViewPager);
+
+        //Confirguro el Adapter del ViewPager buscado en la línea anterior
+        ViewPagerAdapterMain adapterMain = new ViewPagerAdapterMain(getSupportFragmentManager());
+        mainViewPager.setAdapter(adapterMain);
+
+        //Configuro la vista inicial
+        mainViewPager.setCurrentItem(0);
+        mainViewPager.setClipToPadding(false);
+
+        //Agrego el TabLayout
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(mainViewPager);
     }
 
     @Override
-    public void irDetalle(String titulo,Integer categoria){
+    public void irDetalle(String titulo, Integer categoria) {
 
         Intent intent = new Intent(MainActivity.this, DetalleActivity.class);
 
@@ -71,18 +89,19 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
         startActivity(intent);
     }
 
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu,menu);
+        menuInflater.inflate(R.menu.menu, menu);
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.app_bar_search:
-                Toast.makeText(getApplicationContext(),"QUE PASO eh",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "QUE PASO eh", Toast.LENGTH_LONG).show();
                 return true;
         }
         return false;
     }
+
 }
