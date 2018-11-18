@@ -25,8 +25,8 @@ import com.example.digital.appnews.R;
 public class MainActivity extends AppCompatActivity implements NoticiasAdaptador.AdapterListener {
 
     private ViewPager mainViewPager;
-    private Fragment selectedFragment = null;
     private FrameLayout idContainer;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +45,11 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.navigation_inicio:
+                                tabLayout.setVisibility(View.VISIBLE);
                                 cargarViewPager();
                                 break;
                             case R.id.navigation_favorito:
+                                tabLayout.setVisibility(View.GONE);
                                 cargarFragment();
                                 break;
                         }
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
         cargarViewPager();
 
         //Agrego el TabLayout
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(mainViewPager);
     }
 
@@ -117,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
         mainViewPager.setVisibility(View.INVISIBLE);
 
         //cargo el fragment favorito
-        selectedFragment = new FavoritosFragment();
+        Fragment selectedFragment = new FavoritosFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.idContainer, selectedFragment);
         transaction.commit();
