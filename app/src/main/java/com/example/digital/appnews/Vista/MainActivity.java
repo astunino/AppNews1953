@@ -14,12 +14,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.digital.appnews.Modelo.ViewPagerAdapterMain;
 import com.example.digital.appnews.R;
 
 public class MainActivity extends AppCompatActivity implements NoticiasAdaptador.AdapterListener {
+
+    private ViewPager mainViewPager;
+    private Fragment selectedFragment = null;
+    private FrameLayout idContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,40 +43,25 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        Fragment selectedFragment = null;
                         switch (item.getItemId()) {
                             case R.id.navigation_inicio:
-                                selectedFragment = new NoticiasFragment();
+                                cargarViewPager();
                                 break;
                             case R.id.navigation_favorito:
-                                selectedFragment = new FavoritosFragment();
+                                cargarFragment();
                                 break;
                         }
-                        /*FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.idContainer, selectedFragment);
-                        transaction.commit();*/
+
                         return true;
                     }
                 });
 
 
-       /* NoticiasFragment noticiasFragment = new NoticiasFragment();
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.idContainer, noticiasFragment);
-        fragmentTransaction.commit();*/
-
         //Busco el ViewPager en el Layout
-        ViewPager mainViewPager = findViewById(R.id.mainViewPager);
+        mainViewPager = findViewById(R.id.mainViewPager);
+        idContainer = findViewById(R.id.idContainer);
 
-        //Confirguro el Adapter del ViewPager buscado en la línea anterior
-        ViewPagerAdapterMain adapterMain = new ViewPagerAdapterMain(getSupportFragmentManager());
-        mainViewPager.setAdapter(adapterMain);
-
-        //Configuro la vista inicial
-        mainViewPager.setCurrentItem(0);
-        mainViewPager.setClipToPadding(false);
+        cargarViewPager();
 
         //Agrego el TabLayout
         TabLayout tabLayout = findViewById(R.id.tabLayout);
@@ -104,4 +96,30 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
         return false;
     }
 
+    public void cargarViewPager(){
+        //invisibilizo el Fragment y visivilizo el viewpger (es mejor cerrarlo pero no sé como)
+        idContainer.setVisibility(View.INVISIBLE);
+        mainViewPager.setVisibility(View.VISIBLE);
+
+        //Confirguro el Adapter del ViewPager buscado en la línea anterior
+
+        ViewPagerAdapterMain adapterMain = new ViewPagerAdapterMain(getSupportFragmentManager());
+        mainViewPager.setAdapter(adapterMain);
+
+        //Configuro la vista inicial
+        mainViewPager.setCurrentItem(0);
+        mainViewPager.setClipToPadding(false);
+    }
+
+    public void cargarFragment(){
+        //invisibilizo el ViewPager y visivilizo el viewpger (es mejor cerrarlo pero no sé como)
+        idContainer.setVisibility(View.VISIBLE);
+        mainViewPager.setVisibility(View.INVISIBLE);
+
+        //cargo el fragment favorito
+        selectedFragment = new FavoritosFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.idContainer, selectedFragment);
+        transaction.commit();
+    }
 }
