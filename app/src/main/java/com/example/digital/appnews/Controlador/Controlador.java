@@ -1,9 +1,5 @@
 package com.example.digital.appnews.Controlador;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-
 import com.example.digital.appnews.DAO.DAOArchivo;
 import com.example.digital.appnews.DAO.DAOInternet;
 import com.example.digital.appnews.Modelo.Noticia;
@@ -11,7 +7,6 @@ import com.example.digital.appnews.Util.ResultListener;
 import com.example.digital.appnews.Vista.NoticiasFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class Controlador{
