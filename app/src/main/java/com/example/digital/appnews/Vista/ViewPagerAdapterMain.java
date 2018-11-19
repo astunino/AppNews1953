@@ -1,4 +1,4 @@
-package com.example.digital.appnews.Modelo;
+package com.example.digital.appnews.Vista;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

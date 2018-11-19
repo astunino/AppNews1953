@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -15,11 +14,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.example.digital.appnews.Modelo.ViewPagerAdapterMain;
 import com.example.digital.appnews.R;
 
 public class MainActivity extends AppCompatActivity implements NoticiasAdaptador.AdapterListener {
@@ -92,7 +89,8 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.app_bar_search:
-                Toast.makeText(getApplicationContext(), "QUE PASO eh", Toast.LENGTH_LONG).show();
+                Intent buscarActivity = new Intent(MainActivity.this, BuscarActivity.class);
+                startActivity(buscarActivity);
                 return true;
         }
         return false;

@@ -31,6 +31,7 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
     private RecyclerView recyclerViewNoticias;
     private NoticiasAdaptador adaptador;
     private Integer categoria = 0;
+    private String buscar;
 
     public static final String KEY_TODO = "0";
     public static final String KEY_BUSINESS = "1";
@@ -39,7 +40,9 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
     public static final String KEY_ENTERTAINMENT = "4";
     public static final String KEY_TECHNOLOGY = "5";
     public static final String KEY_HEALTH = "6";
+    public static final String KEY_SEARCH = "7";
     public static final String KEY_CATEGORIA = "categoria";
+    public static final String KEY_BUSCAR = "buscar";
 
     public NoticiasFragment() {
         // Required empty public constructor
@@ -55,6 +58,9 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
         //Obtengo los datos del Bundle
         categoria = bundle.getInt(KEY_CATEGORIA);
 
+        if(categoria==7){
+            buscar = bundle.getString(KEY_BUSCAR);
+        }
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_noticias, container, false);
         //Obtengo el Recycler View del layout
@@ -86,6 +92,9 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
             case 6:
                 controlador = new Controlador(KEY_HEALTH);
                 break;
+            case 7:
+                controlador = new Controlador(KEY_SEARCH,buscar);
+                break;
         }
 
         controlador.obtenerNoticias(new ResultListener<ArrayList<Noticia>>() {
@@ -116,7 +125,6 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
         listener.irDetalle(titulo, categoria);
     }
 
-
     //Este método me "fabrica" un NoticiasFragment filtrado por la categoría que se le pasa por argumento
     public static NoticiasFragment noticiasFragment(Integer categoria) {
         NoticiasFragment fragment = new NoticiasFragment();
@@ -125,4 +133,5 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
         fragment.setArguments(bundle);
         return fragment;
     }
+
 }

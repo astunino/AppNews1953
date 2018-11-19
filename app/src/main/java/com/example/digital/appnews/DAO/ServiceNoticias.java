@@ -8,7 +8,7 @@ import retrofit2.http.Query;
 
 public interface ServiceNoticias {
 
-    @GET("/v2/top-headlines")
+    @GET("top-headlines")
     Call<ContenedorNoticias> getNewsContainerCountry(@Query("country") String country,
                                               @Query("apiKey") String apiKey);
 
@@ -18,7 +18,7 @@ public interface ServiceNoticias {
                                                       @Query("apiKey") String apiKey);
 
     @GET("everything")
-    Call<ContenedorNoticias> getArticulosPorTema(@Query("apiKey") String apiKey,
-                                                    @Query("q") String tema,
-                                                    @Query("language") String idioma);
+    Call<ContenedorNoticias> getArticulosPorTema(@Query("q") String tema,
+                                                 @Query("language") String idioma,
+                                                 @Query("apiKey") String apiKey);
 }

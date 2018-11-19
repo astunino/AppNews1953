@@ -8,6 +8,7 @@
     <string name="business">Business</string>
     <string name="entertainment">Entertainment</string>
     <string name="health">Health</string>
+    <string name="buscar">Ingrese tema a buscar...</string>
 
 
 </resources>

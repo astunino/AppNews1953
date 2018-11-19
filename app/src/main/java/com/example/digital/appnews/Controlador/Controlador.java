@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class Controlador{
 
     private String categoria;
+    private String buscar;
 
     public Controlador(){
         this.categoria=NoticiasFragment.KEY_TODO;
@@ -21,10 +22,15 @@ public class Controlador{
         this.categoria=categoria;
     }
 
+    public Controlador(String categoria,String buscar){
+        this.categoria=categoria;
+        this.buscar=buscar;
+    }
+
     public void obtenerNoticias(final ResultListener<ArrayList<Noticia>> listenerView){
 
         if(hayInternet()){
-            DAOInternet daoInternet = new DAOInternet(categoria);
+            DAOInternet daoInternet = new DAOInternet(categoria,buscar);
             daoInternet.obtenerNoticias(new ResultListener<ArrayList<Noticia>>(){
 
                 @Override
