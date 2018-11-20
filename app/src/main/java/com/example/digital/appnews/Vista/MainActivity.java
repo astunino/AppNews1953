@@ -53,8 +53,9 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
 
                             case R.id.navigation_login:
                                 tabLayout.setVisibility(View.GONE);
-                                Fragment fragmentlogin = new VentanaRegistro();
-                                cargarFragment(fragmentlogin);
+                                Intent intent = new Intent(MainActivity.this, VentanaRegistro.class);
+                                startActivity(intent);
+
                                 break;
                         }
 
