@@ -47,7 +47,14 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
                                 break;
                             case R.id.navigation_favorito:
                                 tabLayout.setVisibility(View.GONE);
-                                cargarFragment();
+                                Fragment fragment = new FavoritosFragment();
+                                cargarFragment(fragment);
+                                break;
+
+                            case R.id.navigation_login:
+                                tabLayout.setVisibility(View.GONE);
+                                Fragment fragmentlogin = new VentanaRegistro();
+                                cargarFragment(fragmentlogin);
                                 break;
                         }
 
@@ -96,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
         return false;
     }
 
-    public void cargarViewPager(){
+    public void cargarViewPager() {
         //invisibilizo el Fragment y visivilizo el viewpger (es mejor cerrarlo pero no sé como)
         idContainer.setVisibility(View.INVISIBLE);
         mainViewPager.setVisibility(View.VISIBLE);
@@ -111,13 +118,13 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
         mainViewPager.setClipToPadding(false);
     }
 
-    public void cargarFragment(){
+    public void cargarFragment(Fragment fragment) {
         //invisibilizo el ViewPager y visivilizo el viewpger (es mejor cerrarlo pero no sé como)
         idContainer.setVisibility(View.VISIBLE);
         mainViewPager.setVisibility(View.INVISIBLE);
 
         //cargo el fragment favorito
-        Fragment selectedFragment = new FavoritosFragment();
+        Fragment selectedFragment =fragment;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.idContainer, selectedFragment);
         transaction.commit();

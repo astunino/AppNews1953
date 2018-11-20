@@ -16,6 +16,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbarId"
         app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/selectedNavigationBottom"
+        app:tabTextColor="#000000"
+        app:tabIndicatorColor="#000000"
         />
 
     <android.support.v4.view.ViewPager
