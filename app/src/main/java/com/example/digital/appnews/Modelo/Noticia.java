@@ -92,4 +92,6 @@ public class Noticia {
     public Boolean getImageNull() {
         return imageNull;
     }
+
+
 }

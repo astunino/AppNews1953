@@ -6,10 +6,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.digital.appnews.Modelo.Busqueda;
 import com.example.digital.appnews.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class BuscarActivity extends AppCompatActivity {
 
@@ -26,35 +38,31 @@ public class BuscarActivity extends AppCompatActivity {
         editTextSearch = findViewById(R.id.editTextSearch);
         contenedor = findViewById(R.id.contenedor);
 
-
-        editTextSearch.addTextChangedListener(new TextWatcher() {
+        editTextSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 
-            }
+                    buscar=editTextSearch.getText().toString();
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    Fragment selectedFragment = new NoticiasFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(NoticiasFragment.KEY_CATEGORIA, categoria);
+                    bundle.putString(NoticiasFragment.KEY_BUSCAR,buscar);
+                    selectedFragment.setArguments(bundle);
 
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                //after the change calling the method and passing the search input
-
-                buscar=editable.toString();
-
-                Fragment selectedFragment = new NoticiasFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt(NoticiasFragment.KEY_CATEGORIA, categoria);
-                bundle.putString(NoticiasFragment.KEY_BUSCAR,buscar);
-                selectedFragment.setArguments(bundle);
-
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.contenedor, selectedFragment);
-                transaction.commit();
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.contenedor, selectedFragment);
+                    transaction.commit();
+                    return true;
+                }
+                return false;
             }
         });
 
+        Fragment selectedFragment = new BusquedaFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.contenedor, selectedFragment);
+        transaction.commit();
     }
 }
