@@ -1,6 +1,7 @@
 package com.example.digital.appnews.Vista;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -24,13 +25,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class BuscarActivity extends AppCompatActivity {
+public class BuscarActivity extends AppCompatActivity implements BusquedaFragment.OnFragmentInterface {
 
     private EditText editTextSearch;
     private FrameLayout contenedor;
     private Integer categoria=7;
     private String buscar;
+    private FirebaseDatabase mDatabase;
+    private ArrayList<Busqueda> listadoBuscadas = new ArrayList<>();
+    private DatabaseReference tt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,27 @@ public class BuscarActivity extends AppCompatActivity {
 
         editTextSearch = findViewById(R.id.editTextSearch);
         contenedor = findViewById(R.id.contenedor);
+
+        mDatabase = FirebaseDatabase.getInstance();
+
+        tt = mDatabase.getReference("tt");
+
+        tt.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot childSnapShot : dataSnapshot.getChildren()){
+
+                    Busqueda busqueda = childSnapShot.getValue(Busqueda.class);
+
+                    listadoBuscadas.add(busqueda);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         editTextSearch.setOnKeyListener(new View.OnKeyListener()
         {
@@ -51,17 +77,17 @@ public class BuscarActivity extends AppCompatActivity {
                         case KeyEvent.KEYCODE_DPAD_CENTER:
                         case KeyEvent.KEYCODE_ENTER:
 
-                            buscar=editTextSearch.getText().toString();
+                            buscar=editTextSearch.getText().toString().toUpperCase();
 
-                            Fragment selectedFragment = new NoticiasFragment();
-                            Bundle bundle = new Bundle();
-                            bundle.putInt(NoticiasFragment.KEY_CATEGORIA, categoria);
-                            bundle.putString(NoticiasFragment.KEY_BUSCAR,buscar);
-                            selectedFragment.setArguments(bundle);
+                            Busqueda buscado = existeBusqueda(buscar);
 
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                            transaction.replace(R.id.contenedor, selectedFragment);
-                            transaction.commit();
+                            if(buscado!=null){
+                                tt.child(buscar).setValue(buscado);
+                            }else{
+                                tt.child(buscar).setValue(new Busqueda(buscar,"1"));
+                            }
+
+                            reemplazarFragment(buscar);
 
                             return true;
                         default:
@@ -76,5 +102,43 @@ public class BuscarActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.contenedor, selectedFragment);
         transaction.commit();
+    }
+
+    public Busqueda existeBusqueda(String busqueda){
+
+        for(int i=0;i<listadoBuscadas.size();i++){
+            if(listadoBuscadas.get(i).getBusqueda().equals(busqueda)){
+                listadoBuscadas.get(i).setCantidad(String.valueOf(Integer.valueOf(listadoBuscadas.get(i).getCantidad())+1));
+                return listadoBuscadas.get(i);
+            }
+        }
+
+        return null;
+    }
+
+    public void reemplazarFragment(String buscar){
+        Fragment selectedFragment = new NoticiasFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(NoticiasFragment.KEY_CATEGORIA,categoria);
+        bundle.putString(NoticiasFragment.KEY_BUSCAR,buscar);
+        selectedFragment.setArguments(bundle);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.contenedor, selectedFragment);
+        transaction.commit();
+    }
+
+    @Override
+    public void click(String buscar){
+
+        Busqueda buscado = existeBusqueda(buscar);
+
+        if(buscado!=null){
+            tt.child(buscar).setValue(buscado);
+        }else{
+            tt.child(buscar).setValue(new Busqueda(buscar,"1"));
+        }
+
+        reemplazarFragment(buscar);
     }
 }

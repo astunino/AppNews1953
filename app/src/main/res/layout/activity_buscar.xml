@@ -19,11 +19,14 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:imeOptions="actionSearch"
+        android:imeOptions="actionGo"
+        android:maxLines="1"
         android:hint="@string/buscar"
         android:textColorHint="#595858"
         android:textColor="#595858"
         android:textColorLink="#595858"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         />
 
     <FrameLayout

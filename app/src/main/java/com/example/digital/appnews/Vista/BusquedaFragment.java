@@ -1,6 +1,7 @@
 package com.example.digital.appnews.Vista;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -51,10 +52,9 @@ public class BusquedaFragment extends Fragment {
 
         mDatabase = FirebaseDatabase.getInstance();
 
-        DatabaseReference raiz = mDatabase.getReference("busqueda");
-        //DatabaseReference busqueda = raiz.child("busqueda");
+        DatabaseReference tt = mDatabase.getReference("tt");
 
-        raiz.addListenerForSingleValueEvent(new ValueEventListener() {
+        tt.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapShot : dataSnapshot.getChildren()){
@@ -79,14 +79,77 @@ public class BusquedaFragment extends Fragment {
             }
         });
 
+        busqueda1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getContext();
+                OnFragmentInterface listener = (OnFragmentInterface) context;
+
+                String busqueda = busqueda1.getText().toString().substring(1,busqueda1.getText().toString().length());
+
+                listener.click(busqueda);
+            }
+        });
+
+        busqueda2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getContext();
+                OnFragmentInterface listener = (OnFragmentInterface) context;
+
+                String busqueda = busqueda2.getText().toString().substring(1,busqueda2.getText().toString().length());
+
+                listener.click(busqueda);
+            }
+        });
+
+        busqueda3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getContext();
+                OnFragmentInterface listener = (OnFragmentInterface) context;
+
+                String busqueda = busqueda3.getText().toString().substring(1,busqueda3.getText().toString().length());
+
+                listener.click(busqueda);
+            }
+        });
+
+        busqueda4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getContext();
+                OnFragmentInterface listener = (OnFragmentInterface) context;
+
+                String busqueda = busqueda4.getText().toString().substring(1,busqueda4.getText().toString().length());
+
+                listener.click(busqueda);
+            }
+        });
+
+        busqueda5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getContext();
+                OnFragmentInterface listener = (OnFragmentInterface) context;
+
+                String busqueda = busqueda5.getText().toString().substring(1,busqueda5.getText().toString().length());
+
+                listener.click(busqueda);
+            }
+        });
+
         return view;
     }
 
     public class BuscadorComparator implements Comparator<Busqueda>
     {
         public int compare(Busqueda left, Busqueda right) {
-            return right.getCantidad().compareTo(left.getCantidad());
+            return Integer.valueOf(right.getCantidad()).compareTo(Integer.valueOf(left.getCantidad()));
         }
     }
 
+    public interface OnFragmentInterface{
+        void click(String busqueda);
+    }
 }

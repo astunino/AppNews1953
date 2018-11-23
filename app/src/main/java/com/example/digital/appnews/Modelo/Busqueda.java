@@ -9,6 +9,11 @@ public class Busqueda {
 
     }
 
+    public Busqueda(String busqueda, String cantidad) {
+        this.busqueda = busqueda;
+        this.cantidad = cantidad;
+    }
+
     public String getBusqueda() {
         return busqueda;
     }
