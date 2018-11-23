@@ -1,5 +1,6 @@
 package com.example.digital.appnews.Vista;
 
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -38,23 +40,33 @@ public class BuscarActivity extends AppCompatActivity {
         editTextSearch = findViewById(R.id.editTextSearch);
         contenedor = findViewById(R.id.contenedor);
 
-        editTextSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+        editTextSearch.setOnKeyListener(new View.OnKeyListener()
+        {
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if (event.getAction() == KeyEvent.ACTION_DOWN)
+                {
+                    switch (keyCode)
+                    {
+                        case KeyEvent.KEYCODE_DPAD_CENTER:
+                        case KeyEvent.KEYCODE_ENTER:
 
-                    buscar=editTextSearch.getText().toString();
+                            buscar=editTextSearch.getText().toString();
 
-                    Fragment selectedFragment = new NoticiasFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt(NoticiasFragment.KEY_CATEGORIA, categoria);
-                    bundle.putString(NoticiasFragment.KEY_BUSCAR,buscar);
-                    selectedFragment.setArguments(bundle);
+                            Fragment selectedFragment = new NoticiasFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putInt(NoticiasFragment.KEY_CATEGORIA, categoria);
+                            bundle.putString(NoticiasFragment.KEY_BUSCAR,buscar);
+                            selectedFragment.setArguments(bundle);
 
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.contenedor, selectedFragment);
-                    transaction.commit();
-                    return true;
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.contenedor, selectedFragment);
+                            transaction.commit();
+
+                            return true;
+                        default:
+                            break;
+                    }
                 }
                 return false;
             }
