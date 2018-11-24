@@ -141,4 +141,10 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
 
         reemplazarFragment(buscar);
     }
+
+    @Override
+    public void clickCanal(String source){
+        reemplazarFragment(source);
+    }
+
 }

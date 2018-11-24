@@ -32,6 +32,7 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
     private NoticiasAdaptador adaptador;
     private Integer categoria = 0;
     private String buscar;
+    private String source;
 
     public static final String KEY_TODO = "0";
     public static final String KEY_BUSINESS = "1";
@@ -41,8 +42,11 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
     public static final String KEY_TECHNOLOGY = "5";
     public static final String KEY_HEALTH = "6";
     public static final String KEY_SEARCH = "7";
+    public static final String KEY_CANAL = "8";
     public static final String KEY_CATEGORIA = "categoria";
     public static final String KEY_BUSCAR = "buscar";
+    public static final String KEY_SOURCE = "source";
+
 
     public NoticiasFragment() {
         // Required empty public constructor
@@ -61,6 +65,10 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
         if(categoria==7){
             buscar = bundle.getString(KEY_BUSCAR);
         }
+        if(categoria==8){
+            source = bundle.getString(KEY_BUSCAR);
+        }
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_noticias, container, false);
         //Obtengo el Recycler View del layout
@@ -94,6 +102,9 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
                 break;
             case 7:
                 controlador = new Controlador(KEY_SEARCH,buscar);
+                break;
+            case 8:
+                controlador = new Controlador(KEY_CANAL,source);
                 break;
         }
 

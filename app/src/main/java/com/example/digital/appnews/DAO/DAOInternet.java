@@ -17,6 +17,7 @@ public class DAOInternet extends DaoHelper {
         private Call<ContenedorNoticias> call;
         private String country = "ar";
         private String languaje = "es";
+        private String source;
         private static String apikey = "8b141017cf6848908829489044ed6f71";
         private ArrayList<String> categorias = new ArrayList<>();
 
@@ -55,6 +56,10 @@ public class DAOInternet extends DaoHelper {
             else if(categoria.equals(NoticiasFragment.KEY_SEARCH))
             {
                 call = serviceNoticias.getArticulosPorTema(buscar,languaje,apikey);
+            }
+            else if(categoria.equals(NoticiasFragment.KEY_CANAL))
+            {
+                call = serviceNoticias.getArticulosPorCanal(source,apikey);
             }
             else
                 {

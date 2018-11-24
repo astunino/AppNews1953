@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class BusquedaFragment extends Fragment {
     private FirebaseDatabase mDatabase;
     private ArrayList<Busqueda> listadoBuscadas = new ArrayList<>();
     private TextView busqueda1,busqueda2,busqueda3,busqueda4,busqueda5;
+    private ImageView imageView1,imageView2,imageView3,imageView4,imageView5;
     private DataSnapshot dataSnapshot;
 
     public BusquedaFragment() {
@@ -49,6 +51,11 @@ public class BusquedaFragment extends Fragment {
         busqueda3 = view.findViewById(R.id.busqueda3);
         busqueda4 = view.findViewById(R.id.busqueda4);
         busqueda5 = view.findViewById(R.id.busqueda5);
+        imageView1 = view.findViewById(R.id.imageView1);
+        imageView2 = view.findViewById(R.id.imageView2);
+        imageView3 = view.findViewById(R.id.imageView3);
+        imageView4 = view.findViewById(R.id.imageView4);
+        imageView5 = view.findViewById(R.id.imageView5);
 
         mDatabase = FirebaseDatabase.getInstance();
 
@@ -139,6 +146,60 @@ public class BusquedaFragment extends Fragment {
             }
         });
 
+        imageView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = getContext();
+                OnFragmentInterface listener = (OnFragmentInterface) context;
+
+                listener.clickCanal("la-nacion");
+            }
+        });
+
+
+        imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = getContext();
+                OnFragmentInterface listener = (OnFragmentInterface) context;
+
+                listener.clickCanal("infobae");
+            }
+        });
+
+
+        imageView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = getContext();
+                OnFragmentInterface listener = (OnFragmentInterface) context;
+
+                listener.clickCanal("google-news-ar");
+            }
+        });
+
+
+        imageView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = getContext();
+                OnFragmentInterface listener = (OnFragmentInterface) context;
+
+                listener.clickCanal("cnn-es");
+            }
+        });
+
+
+        imageView5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = getContext();
+                OnFragmentInterface listener = (OnFragmentInterface) context;
+
+                listener.clickCanal("la-gaceta");
+            }
+        });
+
         return view;
     }
 
@@ -151,5 +212,6 @@ public class BusquedaFragment extends Fragment {
 
     public interface OnFragmentInterface{
         void click(String busqueda);
+        void clickCanal(String canal);
     }
 }
