@@ -28,19 +28,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         this.objetos = objetos;
     }
 
-    /*public ViewPagerAdapter(FragmentManager fm, List<String> objetos) {
-        super(fm);
-
-        // List Fragment
-        datos = new ArrayList<>();
-        for(String dato: objetos){
-            NoticiaDetalleFragment fragment = NoticiaDetalleFragment.fabrica(dato);
-            datos.add(fragment);
-        }
-
-        this.objetosString = objetos;
-    }*/
-
     @Override
     public Fragment getItem(int i) {
         return datos.get(i);

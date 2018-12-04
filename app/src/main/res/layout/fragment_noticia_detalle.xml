@@ -7,11 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".Vista.NoticiaDetalleFragment">
 
-    <WebView
+    <!--<WebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/webView">
 
     </WebView>
+-->
+
+    <include layout="@layout/toolbar" />
+
+
 
 </FrameLayout>
