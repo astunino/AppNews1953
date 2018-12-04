@@ -19,7 +19,7 @@ public interface ServiceNoticias {
 
     @GET("top-headlines")
     Call<ContenedorNoticias> getArticulosPorCanal(@Query("source") String source,
-                                                      @Query("apiKey") String apiKey);
+                                                  @Query("apiKey") String apiKey);
 
     @GET("everything")
     Call<ContenedorNoticias> getArticulosPorTema(@Query("q") String tema,

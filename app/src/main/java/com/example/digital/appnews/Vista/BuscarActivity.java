@@ -31,7 +31,7 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
 
     private EditText editTextSearch;
     private FrameLayout contenedor;
-    private Integer categoria=7;
+    private Integer categoria;
     private String buscar;
     private FirebaseDatabase mDatabase;
     private ArrayList<Busqueda> listadoBuscadas = new ArrayList<>();
@@ -138,7 +138,25 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
         }else{
             tt.child(buscar).setValue(new Busqueda(buscar,"1"));
         }
-
+        categoria=7;
         reemplazarFragment(buscar);
+    }
+
+    @Override
+    public void clickCanal(String source){
+        categoria=8;
+        reemplazarFragment(source);
+    }
+
+    public void irDetalle(String buscar, Integer categoria) {
+
+        Intent intent = new Intent(BuscarActivity.this, DetalleActivity.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(NoticiaDetalleFragment.KEY_BUSCAR, buscar);
+        bundle.putInt(NoticiaDetalleFragment.KEY_CATEGORIA, categoria);
+
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

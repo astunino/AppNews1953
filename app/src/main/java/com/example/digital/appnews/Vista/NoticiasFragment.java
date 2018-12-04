@@ -32,7 +32,6 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
     private NoticiasAdaptador adaptador;
     private Integer categoria = 0;
     private String buscar;
-    private String source;
 
     public static final String KEY_TODO = "0";
     public static final String KEY_BUSINESS = "1";
@@ -45,7 +44,6 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
     public static final String KEY_CANAL = "8";
     public static final String KEY_CATEGORIA = "categoria";
     public static final String KEY_BUSCAR = "buscar";
-    public static final String KEY_SOURCE = "source";
 
 
     public NoticiasFragment() {
@@ -62,11 +60,8 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
         //Obtengo los datos del Bundle
         categoria = bundle.getInt(KEY_CATEGORIA);
 
-        if(categoria==7){
+        if(categoria==7||categoria==8){
             buscar = bundle.getString(KEY_BUSCAR);
-        }
-        if(categoria==8){
-            source = bundle.getString(KEY_BUSCAR);
         }
 
         // Inflate the layout for this fragment
@@ -104,7 +99,7 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
                 controlador = new Controlador(KEY_SEARCH,buscar);
                 break;
             case 8:
-                controlador = new Controlador(KEY_CANAL,source);
+                controlador = new Controlador(KEY_CANAL,buscar);
                 break;
         }
 

@@ -17,7 +17,6 @@ public class DAOInternet extends DaoHelper {
         private Call<ContenedorNoticias> call;
         private String country = "ar";
         private String languaje = "es";
-        private String source;
         private static String apikey = "8b141017cf6848908829489044ed6f71";
         private ArrayList<String> categorias = new ArrayList<>();
 
@@ -35,19 +34,19 @@ public class DAOInternet extends DaoHelper {
 
         }
 
-    public DAOInternet(String categoria,String buscar) {
-        super("https://newsapi.org/V2/");
-        serviceNoticias = retrofit.create(ServiceNoticias.class);
-        this.categoria=categoria;
-        this.buscar=buscar;
-        categorias.add("Todo");
-        categorias.add("business");
-        categorias.add("sports");
-        categorias.add("science");
-        categorias.add("entertainment");
-        categorias.add("technology");
-        categorias.add("health");
-    }
+        public DAOInternet(String categoria,String buscar) {
+            super("https://newsapi.org/V2/");
+            serviceNoticias = retrofit.create(ServiceNoticias.class);
+            this.categoria=categoria;
+            this.buscar=buscar;
+            categorias.add("Todo");
+            categorias.add("business");
+            categorias.add("sports");
+            categorias.add("science");
+            categorias.add("entertainment");
+            categorias.add("technology");
+            categorias.add("health");
+        }
 
         public void obtenerNoticias(final ResultListener<ArrayList<Noticia>> listenerDelController) {
             if (categoria.equals(NoticiasFragment.KEY_TODO)) {
@@ -59,12 +58,12 @@ public class DAOInternet extends DaoHelper {
             }
             else if(categoria.equals(NoticiasFragment.KEY_CANAL))
             {
-                call = serviceNoticias.getArticulosPorCanal(source,apikey);
+                call = serviceNoticias.getArticulosPorCanal(buscar,apikey);
             }
             else
-                {
-                    call = serviceNoticias.getArticulosPorCategoria(country,categorias.get(Integer.valueOf(categoria)),apikey);
-                }
+            {
+                call = serviceNoticias.getArticulosPorCategoria(country,categorias.get(Integer.valueOf(categoria)),apikey);
+            }
 
             call.enqueue(new Callback<ContenedorNoticias>() {
                 @Override
