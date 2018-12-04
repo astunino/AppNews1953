@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class DetalleActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
-    private String titulo;
+    private String titulo,buscar;
     private Integer categoria;
 
     @Override
@@ -32,6 +32,7 @@ public class DetalleActivity extends AppCompatActivity {
 
         titulo = bundle.getString(NoticiaDetalleFragment.KEY_TITULO);
         categoria = bundle.getInt(NoticiaDetalleFragment.KEY_CATEGORIA);
+        buscar = bundle.getString(NoticiaDetalleFragment.KEY_BUSCAR);
 
         viewPager = findViewById(R.id.viewPager);
 

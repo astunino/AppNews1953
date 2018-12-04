@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class BuscarActivity extends AppCompatActivity implements BusquedaFragment.OnFragmentInterface {
+public class BuscarActivity extends AppCompatActivity implements BusquedaFragment.OnFragmentInterface,NoticiasAdaptador.AdapterListener {
 
     private EditText editTextSearch;
     private FrameLayout contenedor;
@@ -141,10 +141,4 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
 
         reemplazarFragment(buscar);
     }
-
-    @Override
-    public void clickCanal(String source){
-        reemplazarFragment(source);
-    }
-
 }
