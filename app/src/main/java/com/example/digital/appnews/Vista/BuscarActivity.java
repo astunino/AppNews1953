@@ -87,6 +87,7 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
                                 tt.child(buscar).setValue(new Busqueda(buscar,"1"));
                             }
 
+                            categoria=7;
                             reemplazarFragment(buscar);
 
                             return true;
@@ -117,11 +118,15 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
     }
 
     public void reemplazarFragment(String buscar){
+
         Fragment selectedFragment = new NoticiasFragment();
+
         Bundle bundle = new Bundle();
         bundle.putInt(NoticiasFragment.KEY_CATEGORIA,categoria);
         bundle.putString(NoticiasFragment.KEY_BUSCAR,buscar);
         selectedFragment.setArguments(bundle);
+
+        editTextSearch.setText(buscar);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.contenedor, selectedFragment);
@@ -131,6 +136,7 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
     @Override
     public void click(String buscar){
 
+        this.buscar=buscar;
         Busqueda buscado = existeBusqueda(buscar);
 
         if(buscado!=null){
@@ -145,15 +151,20 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
     @Override
     public void clickCanal(String source){
         categoria=8;
+        buscar=source;
         reemplazarFragment(source);
     }
 
-    public void irDetalle(String buscar, Integer categoria) {
+    public void irDetalle(String titulo, Integer categoria) {
 
         Intent intent = new Intent(BuscarActivity.this, DetalleActivity.class);
 
         Bundle bundle = new Bundle();
-        bundle.putString(NoticiaDetalleFragment.KEY_BUSCAR, buscar);
+
+        bundle.putString(NoticiaDetalleFragment.KEY_TITULO, titulo);
+        if(categoria==7||categoria==8){
+            bundle.putString(NoticiaDetalleFragment.KEY_BUSCAR,buscar);
+        }
         bundle.putInt(NoticiaDetalleFragment.KEY_CATEGORIA, categoria);
 
         intent.putExtras(bundle);
