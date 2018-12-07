@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class DetalleActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
-    private FloatingActionButton imageButtonVerMas;
+    private FloatingActionButton imageButtonVerMas,imageButtonFav;
     private String titulo,buscar;
     private Integer categoria;
     private String url;

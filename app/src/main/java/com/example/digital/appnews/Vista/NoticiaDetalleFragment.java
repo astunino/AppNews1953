@@ -4,6 +4,7 @@ package com.example.digital.appnews.Vista;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,10 +33,10 @@ public class NoticiaDetalleFragment extends Fragment {
     public static final String KEY_DESCRIPCION = "descripcion";
     public static final String KEY_IMAGEN = "imagen";
     public static final String KEY_BUSCAR = "buscar";
-    private FloatingActionButton imageButtonVerMas;
+    private FloatingActionButton imageButtonVerMas, imageButtonFav;
     private String url;
 
-    public static NoticiaDetalleFragment fabrica(Noticia dato){
+    public static NoticiaDetalleFragment fabrica(Noticia dato) {
         NoticiaDetalleFragment fragment = new NoticiaDetalleFragment();
 
         Bundle bundle = new Bundle();
@@ -59,7 +60,7 @@ public class NoticiaDetalleFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_noticia_detalle, container, false);
+        View view = inflater.inflate(R.layout.fragment_noticia_detalle, container, false);
 
         Bundle bundle = getArguments();
         url = bundle.getString(KEY_URL);
@@ -71,13 +72,14 @@ public class NoticiaDetalleFragment extends Fragment {
         TextView textViewTitulo = view.findViewById(R.id.textViewTitulo);
         TextView textViewDescripcion = view.findViewById(R.id.textViewDescripcion);
         imageButtonVerMas = view.findViewById(R.id.imageButtonVerMas);
+        imageButtonFav = view.findViewById(R.id.imageButtonFav);
 
-        if(imagen==null){
+        if (imagen == null) {
             imageViewDetalle.setImageResource(R.drawable.no_image);
             imageViewDetalle.setVisibility(View.GONE);
-        }else{
-            if(imagen.startsWith("//")){
-                imagen=("http:"+imagen);
+        } else {
+            if (imagen.startsWith("//")) {
+                imagen = ("http:" + imagen);
             }
             Glide.with(getActivity()).load(imagen).into(imageViewDetalle);
             imageViewDetalle.setVisibility(View.VISIBLE);
@@ -85,8 +87,8 @@ public class NoticiaDetalleFragment extends Fragment {
 
         textViewTitulo.setText(titulo);
 
-        String part1 = descripcion.substring(0,250);
-        textViewDescripcion.setText(part1+"...");
+        String part1 = descripcion.substring(0, 250);
+        textViewDescripcion.setText(part1 + "...");
 
         imageButtonVerMas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +101,16 @@ public class NoticiaDetalleFragment extends Fragment {
 
                 intent.putExtras(bundle);
                 startActivity(intent);
+
+            }
+        });
+
+        imageButtonFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Snackbar.make(v, "Debe estar logueado para agregar un FAV", Snackbar.LENGTH_LONG)
+                        .show();
 
             }
         });

@@ -7,62 +7,74 @@
     android:layout_height="match_parent"
     tools:context=".Vista.NoticiaDetalleFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageViewDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageViewDetalle"
-                android:layout_width="wrap_content"
-                android:layout_height="250dp"
-                android:scaleType="centerCrop"
-                />
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/cardViewDetalle"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:cardElevation="2dp"
-                app:cardCornerRadius="10dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true">
+                android:layout_height="match_parent">
 
-                <ScrollView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@id/textViewTitulo"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent"
+                        android:textStyle="bold"
+                        android:padding="10dp"
+                        android:textSize="22sp"/>
 
-                        <TextView
-                            android:id="@id/textViewTitulo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="22sp"/>
-
-                        <TextView
-                            android:id="@+id/textViewDescripcion"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"/>
+                    <TextView
+                        android:id="@+id/textViewDescripcion"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingRight="50dp"
+                        android:paddingLeft="10dp"
+                        android:textSize="16sp"/>
 
                 </LinearLayout>
             </ScrollView>
-            </android.support.v7.widget.CardView>
         </LinearLayout>
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/imageButtonVerMas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_anchorGravity="right|bottom"
-            app:layout_anchor="@+id/cardViewDetalle"
-            android:layout_margin="16dp"
-            app:backgroundTint="@android:color/white"
-            android:src="@drawable/vermas" />
+    </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/imageButtonFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchorGravity="top|right"
+        app:layout_anchor="@+id/imageButtonVerMas"
+        android:layout_marginBottom="70dp"
+        android:layout_marginRight="16dp"
+        app:backgroundTint="@android:color/white"
+        android:src="@drawable/heart"
+        app:fabSize="mini"
+        />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/imageButtonVerMas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:layout_margin="16dp"
+        app:backgroundTint="@android:color/white"
+        android:src="@drawable/vermas"
+        app:fabSize="mini"
+        />
 
 </android.support.design.widget.CoordinatorLayout>
