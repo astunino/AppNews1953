@@ -7,19 +7,6 @@
     android:orientation="vertical"
     tools:context=".Vista.FavoritosFragment">
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:gravity="center_horizontal"
-        android:fontFamily="sans-serif-condensed"
-        android:layout_centerInParent="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/nohayfavoritos"
-        android:textColor="#dc000000"
-        android:textSize="40sp" />
-
     <com.airbnb.lottie.LottieAnimationView
 
         android:id="@+id/animation_view"

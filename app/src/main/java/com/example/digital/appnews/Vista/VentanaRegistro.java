@@ -37,6 +37,7 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,7 +142,6 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
         if (firebaseAuthListener != null) {
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
-
 
     }
 }
