@@ -30,7 +30,8 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".Vista.DetalleActivity" />
         <activity android:name=".Vista.BuscarActivity" />
-        <activity android:name=".Vista.VentanaRegistro"></activity>
+        <activity android:name=".Vista.VentanaRegistro" />
+        <activity android:name=".Vista.ViewPageActivity"></activity>
     </application>
 
 </manifest>

@@ -1,7 +1,9 @@
 package com.example.digital.appnews.Vista;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +11,15 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.digital.appnews.Modelo.Noticia;
 import com.example.digital.appnews.R;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,8 +31,9 @@ public class NoticiaDetalleFragment extends Fragment {
     public static final String KEY_CATEGORIA = "categoria";
     public static final String KEY_DESCRIPCION = "descripcion";
     public static final String KEY_IMAGEN = "imagen";
-
-
+    public static final String KEY_BUSCAR = "buscar";
+    private FloatingActionButton imageButtonVerMas;
+    private String url;
 
     public static NoticiaDetalleFragment fabrica(Noticia dato){
         NoticiaDetalleFragment fragment = new NoticiaDetalleFragment();
@@ -34,8 +41,8 @@ public class NoticiaDetalleFragment extends Fragment {
         Bundle bundle = new Bundle();
 
         bundle.putString(NoticiaDetalleFragment.KEY_URL, dato.getUrl());
-        bundle.putString(NoticiaDetalleFragment.KEY_TITULO, dato.getUrl());
-        bundle.putString(NoticiaDetalleFragment.KEY_DESCRIPCION, dato.getDescription());
+        bundle.putString(NoticiaDetalleFragment.KEY_TITULO, dato.getTitle());
+        bundle.putString(NoticiaDetalleFragment.KEY_DESCRIPCION, dato.getContent());
         bundle.putString(NoticiaDetalleFragment.KEY_IMAGEN, dato.getUrlToImagen());
         fragment.setArguments(bundle);
 
@@ -55,20 +62,46 @@ public class NoticiaDetalleFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_noticia_detalle, container, false);
 
         Bundle bundle = getArguments();
-        String url = bundle.getString(KEY_URL);
+        url = bundle.getString(KEY_URL);
         String titulo = bundle.getString(KEY_TITULO);
         String descripcion = bundle.getString(KEY_DESCRIPCION);
         String imagen = bundle.getString(KEY_IMAGEN);
 
-/*
-        WebView myWebView = (WebView) view.findViewById(R.id.webView);
-        WebSettings webSettings = myWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        myWebView.setWebViewClient(new WebViewClient());
-        myWebView.loadUrl(url);
-*/
+        ImageView imageViewDetalle = view.findViewById(R.id.imageViewDetalle);
+        TextView textViewTitulo = view.findViewById(R.id.textViewTitulo);
+        TextView textViewDescripcion = view.findViewById(R.id.textViewDescripcion);
+        imageButtonVerMas = view.findViewById(R.id.imageButtonVerMas);
 
+        if(imagen==null){
+            imageViewDetalle.setImageResource(R.drawable.no_image);
+            imageViewDetalle.setVisibility(View.GONE);
+        }else{
+            if(imagen.startsWith("//")){
+                imagen=("http:"+imagen);
+            }
+            Glide.with(getActivity()).load(imagen).into(imageViewDetalle);
+            imageViewDetalle.setVisibility(View.VISIBLE);
+        }
 
+        textViewTitulo.setText(titulo);
+
+        String part1 = descripcion.substring(0,250);
+        textViewDescripcion.setText(part1+"...");
+
+        imageButtonVerMas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getContext(), ViewPageActivity.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putString(NoticiaDetalleFragment.KEY_URL, url);
+
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
 
         return view;
     }
