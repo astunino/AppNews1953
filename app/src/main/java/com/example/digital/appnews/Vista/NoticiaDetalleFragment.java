@@ -109,13 +109,23 @@ public class NoticiaDetalleFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Snackbar.make(v, "Debe estar logueado para agregar un FAV", Snackbar.LENGTH_LONG)
-                        .show();
+                Snackbar mySnackbar = Snackbar.make(v, "Debe estar logueado para agregar un FAV", Snackbar.LENGTH_LONG);
+                mySnackbar.setAction("ACCEDER", new LoginListener());
 
             }
         });
 
         return view;
+    }
+
+    public class LoginListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+
+            Intent intent = new Intent(getContext(), VentanaRegistro.class);
+            startActivity(intent);
+        }
     }
 
 }
