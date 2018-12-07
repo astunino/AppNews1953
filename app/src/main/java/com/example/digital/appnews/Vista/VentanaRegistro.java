@@ -37,13 +37,10 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ventana_registro);
 
-<<<<<<< HEAD
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -115,7 +112,7 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount signInAccount) {
 
-        
+
         signInButton.setVisibility(View.GONE);
 
         AuthCredential credential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
@@ -127,7 +124,7 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
                 signInButton.setVisibility(View.VISIBLE);
 
                 if (!task.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(),"a", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "a", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -146,8 +143,7 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
         if (firebaseAuthListener != null) {
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
-=======
 
->>>>>>> master
+
     }
 }
