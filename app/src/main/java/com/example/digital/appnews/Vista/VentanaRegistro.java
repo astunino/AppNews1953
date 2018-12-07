@@ -43,6 +43,7 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ventana_registro);
 
+<<<<<<< HEAD
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -145,5 +146,8 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
         if (firebaseAuthListener != null) {
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
+=======
+
+>>>>>>> master
     }
 }
