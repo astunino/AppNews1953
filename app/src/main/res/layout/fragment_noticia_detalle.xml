@@ -62,7 +62,7 @@
         android:layout_marginBottom="70dp"
         android:layout_marginRight="16dp"
         app:backgroundTint="@android:color/white"
-        android:src="@drawable/ic_vermas"
+        android:src="@drawable/heart"
         app:fabSize="mini"
         />
 
@@ -73,7 +73,7 @@
         android:layout_gravity="right|bottom"
         android:layout_margin="16dp"
         app:backgroundTint="@android:color/white"
-        android:src="@drawable/vermas"
+        android:src="@drawable/ic_vermas"
         app:fabSize="mini"
         />
 

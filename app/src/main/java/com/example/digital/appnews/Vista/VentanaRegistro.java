@@ -52,11 +52,9 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
                 .build();
 
         signInButton = (SignInButton) findViewById(R.id.botonGoogle);
-
         signInButton.setSize(SignInButton.SIZE_WIDE);
 
         signInButton.setColorScheme(SignInButton.COLOR_DARK);
-
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

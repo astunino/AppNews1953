@@ -111,6 +111,7 @@ public class NoticiaDetalleFragment extends Fragment {
 
                 Snackbar mySnackbar = Snackbar.make(v, "Debe estar logueado para agregar un FAV", Snackbar.LENGTH_LONG);
                 mySnackbar.setAction("ACCEDER", new LoginListener());
+                mySnackbar.show();
 
             }
         });
