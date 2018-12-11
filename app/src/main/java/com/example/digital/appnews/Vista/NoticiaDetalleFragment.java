@@ -87,7 +87,14 @@ public class NoticiaDetalleFragment extends Fragment {
 
         textViewTitulo.setText(titulo);
 
-        String part1 = descripcion.substring(0, 250);
+        String part1 = ""; //se inicializa esta variable ya que puede no ser sobreescrita si no se entra al if de la siguiente línea
+        if (descripcion != null) { //La noticia puede no tener descripción. Este if, previene esa situación.
+            if (descripcion.length() <= 250) {
+                part1 = descripcion.substring(0, descripcion.length() - 10);
+            } else {
+                part1 = descripcion.substring(0, 250);
+            }
+        }
         textViewDescripcion.setText(part1 + "...");
 
         imageButtonVerMas.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +126,7 @@ public class NoticiaDetalleFragment extends Fragment {
         return view;
     }
 
-    public class LoginListener implements View.OnClickListener{
+    public class LoginListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
