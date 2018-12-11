@@ -1,5 +1,6 @@
 package com.example.digital.appnews.Vista;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +38,8 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
     private FirebaseDatabase mDatabase;
     private ArrayList<Busqueda> listadoBuscadas = new ArrayList<>();
     private DatabaseReference tt;
+    private ImageView imageView1,imageView2,imageView3,imageView4,imageView5;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,11 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
 
         editTextSearch = findViewById(R.id.editTextSearch);
         contenedor = findViewById(R.id.contenedor);
+        imageView1 = findViewById(R.id.imageView1);
+        imageView2 = findViewById(R.id.imageView2);
+        imageView3 = findViewById(R.id.imageView3);
+        imageView4 = findViewById(R.id.imageView4);
+        imageView5 = findViewById(R.id.imageView5);
 
         mDatabase = FirebaseDatabase.getInstance();
 
@@ -99,10 +108,65 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
             }
         });
 
+        imageView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                categoria=8;
+                reemplazarFragment("la-nacion");
+            }
+        });
+
+
+        imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = getContext();
+                BusquedaFragment.OnFragmentInterface listener = (BusquedaFragment.OnFragmentInterface) context;
+
+                listener.clickCanal("infobae");
+            }
+        });
+
+
+        imageView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = getContext();
+                BusquedaFragment.OnFragmentInterface listener = (BusquedaFragment.OnFragmentInterface) context;
+
+                listener.clickCanal("google-news-ar");
+            }
+        });
+
+
+        imageView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = getContext();
+                BusquedaFragment.OnFragmentInterface listener = (BusquedaFragment.OnFragmentInterface) context;
+
+                listener.clickCanal("cnn-es");
+            }
+        });
+
+
+        imageView5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = getContext();
+                BusquedaFragment.OnFragmentInterface listener = (BusquedaFragment.OnFragmentInterface) context;
+
+                listener.clickCanal("la-gaceta");
+            }
+        });
+        
         Fragment selectedFragment = new BusquedaFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.contenedor, selectedFragment);
         transaction.commit();
+
+
+
     }
 
     public Busqueda existeBusqueda(String busqueda){
@@ -155,6 +219,8 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
         reemplazarFragment(source);
     }
 
+
+
     public void irDetalle(String titulo, Integer categoria) {
 
         Intent intent = new Intent(BuscarActivity.this, DetalleActivity.class);
@@ -166,7 +232,6 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
             bundle.putString(NoticiaDetalleFragment.KEY_BUSCAR,buscar);
         }
         bundle.putInt(NoticiaDetalleFragment.KEY_CATEGORIA, categoria);
-
         intent.putExtras(bundle);
         startActivity(intent);
     }
