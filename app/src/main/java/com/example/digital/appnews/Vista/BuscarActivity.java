@@ -112,7 +112,8 @@ public class BuscarActivity extends AppCompatActivity implements NoticiasAdaptad
             @Override
             public void onClick(View view) {
                 categoria=8;
-                reemplazarFragment("la-nacion");
+                buscar="la-nacion";
+                reemplazarFragment(buscar);
             }
         });
 
@@ -121,7 +122,8 @@ public class BuscarActivity extends AppCompatActivity implements NoticiasAdaptad
             @Override
             public void onClick(View view) {
                 categoria=8;
-                reemplazarFragment("infobae");
+                buscar="infobae";
+                reemplazarFragment(buscar);
             }
         });
 
@@ -130,7 +132,8 @@ public class BuscarActivity extends AppCompatActivity implements NoticiasAdaptad
             @Override
             public void onClick(View view) {
                 categoria=8;
-                reemplazarFragment("google-news-ar");
+                buscar="google-news-ar";
+                reemplazarFragment(buscar);
             }
         });
 
@@ -139,7 +142,8 @@ public class BuscarActivity extends AppCompatActivity implements NoticiasAdaptad
             @Override
             public void onClick(View view) {
                 categoria=8;
-                reemplazarFragment("cnn-es");
+                buscar="cnn-es";
+                reemplazarFragment(buscar);
             }
         });
 
@@ -148,7 +152,8 @@ public class BuscarActivity extends AppCompatActivity implements NoticiasAdaptad
             @Override
             public void onClick(View view) {
                 categoria=8;
-                reemplazarFragment("la-gaceta");
+                buscar="la-gaceta";
+                reemplazarFragment(buscar);
             }
         });
 
