@@ -51,11 +51,11 @@ public class BusquedaFragment extends Fragment {
         busqueda3 = view.findViewById(R.id.busqueda3);
         busqueda4 = view.findViewById(R.id.busqueda4);
         busqueda5 = view.findViewById(R.id.busqueda5);
-        imageView1 = view.findViewById(R.id.imageView1);
+      /*  imageView1 = view.findViewById(R.id.imageView1);
         imageView2 = view.findViewById(R.id.imageView2);
         imageView3 = view.findViewById(R.id.imageView3);
         imageView4 = view.findViewById(R.id.imageView4);
-        imageView5 = view.findViewById(R.id.imageView5);
+        imageView5 = view.findViewById(R.id.imageView5);*/
 
         mDatabase = FirebaseDatabase.getInstance();
 
@@ -145,7 +145,7 @@ public class BusquedaFragment extends Fragment {
                 listener.click(busqueda);
             }
         });
-
+/*
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -199,6 +199,7 @@ public class BusquedaFragment extends Fragment {
                 listener.clickCanal("la-gaceta");
             }
         });
+        */
 
         return view;
     }
