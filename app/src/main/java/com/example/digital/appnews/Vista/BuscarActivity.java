@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class BuscarActivity extends AppCompatActivity implements BusquedaFragment.OnFragmentInterface,NoticiasAdaptador.AdapterListener {
+public class BuscarActivity extends AppCompatActivity implements NoticiasAdaptador.AdapterListener {
 
     private EditText editTextSearch;
     private FrameLayout contenedor;
@@ -189,7 +189,6 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
         transaction.commit();
     }
 
-    @Override
     public void click(String buscar){
 
         this.buscar=buscar;
@@ -203,14 +202,6 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
         categoria=7;
         reemplazarFragment(buscar);
     }
-
-    @Override
-    public void clickCanal(String source){
-        categoria=8;
-        buscar=source;
-        reemplazarFragment(source);
-    }
-
 
 
     public void irDetalle(String titulo, Integer categoria) {
