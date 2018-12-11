@@ -26,6 +26,7 @@
         android:textColorLink="#595858"
         android:focusable="true"
         android:focusableInTouchMode="true"
+        android:theme="@style/MyEditTextTheme"/>
         />
     <LinearLayout
         android:layout_width="match_parent"
