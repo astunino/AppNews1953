@@ -88,7 +88,7 @@ public class DetalleActivity extends AppCompatActivity {
             case R.id.app_bar_share:
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "Mirate esta nota en Noticias Now -> " + titulo);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "Mirate esta nota en Noticias Now -> " + titulo +"->"+url);
                 sendIntent.setType("text/plain");
                 sendIntent.setPackage("com.whatsapp");
                 startActivity(sendIntent);
