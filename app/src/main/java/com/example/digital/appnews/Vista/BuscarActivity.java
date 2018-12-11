@@ -1,22 +1,15 @@
 package com.example.digital.appnews.Vista;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.digital.appnews.Modelo.Busqueda;
 import com.example.digital.appnews.R;
@@ -27,9 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
-public class BuscarActivity extends AppCompatActivity implements NoticiasAdaptador.AdapterListener {
+public class BuscarActivity extends AppCompatActivity implements BusquedaFragment.OnFragmentInterface,NoticiasAdaptador.AdapterListener {
 
     private EditText editTextSearch;
     private FrameLayout contenedor;
@@ -112,7 +104,8 @@ public class BuscarActivity extends AppCompatActivity implements NoticiasAdaptad
             @Override
             public void onClick(View view) {
                 categoria=8;
-                reemplazarFragment("la-nacion");
+                buscar="la-nacion";
+                reemplazarFragment(buscar);
             }
         });
 
@@ -121,7 +114,8 @@ public class BuscarActivity extends AppCompatActivity implements NoticiasAdaptad
             @Override
             public void onClick(View view) {
                 categoria=8;
-                reemplazarFragment("infobae");
+                buscar="infobae";
+                reemplazarFragment(buscar);
             }
         });
 
@@ -130,7 +124,8 @@ public class BuscarActivity extends AppCompatActivity implements NoticiasAdaptad
             @Override
             public void onClick(View view) {
                 categoria=8;
-                reemplazarFragment("google-news-ar");
+                buscar="google-news-ar";
+                reemplazarFragment(buscar);
             }
         });
 
@@ -139,7 +134,8 @@ public class BuscarActivity extends AppCompatActivity implements NoticiasAdaptad
             @Override
             public void onClick(View view) {
                 categoria=8;
-                reemplazarFragment("cnn-es");
+                buscar="cnn-es";
+                reemplazarFragment(buscar);
             }
         });
 
@@ -148,7 +144,8 @@ public class BuscarActivity extends AppCompatActivity implements NoticiasAdaptad
             @Override
             public void onClick(View view) {
                 categoria=8;
-                reemplazarFragment("la-gaceta");
+                buscar="la-gaceta";
+                reemplazarFragment(buscar);
             }
         });
 
@@ -189,6 +186,7 @@ public class BuscarActivity extends AppCompatActivity implements NoticiasAdaptad
         transaction.commit();
     }
 
+    @Override
     public void click(String buscar){
 
         this.buscar=buscar;
