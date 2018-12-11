@@ -17,8 +17,8 @@
         android:layout_below="@id/toolbarId"
         app:tabMode="scrollable"
         app:tabSelectedTextColor="@color/selectedNavigationBottom"
-        app:tabTextColor="#000000"
-        app:tabIndicatorColor="#000000"
+        app:tabTextColor="#393939"
+        app:tabIndicatorColor="#393939"
         />
 
     <android.support.v4.view.ViewPager
