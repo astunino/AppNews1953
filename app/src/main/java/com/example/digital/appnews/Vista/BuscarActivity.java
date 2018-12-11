@@ -120,10 +120,8 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
         imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = getContext();
-                BusquedaFragment.OnFragmentInterface listener = (BusquedaFragment.OnFragmentInterface) context;
-
-                listener.clickCanal("infobae");
+                categoria=8;
+                reemplazarFragment("infobae");
             }
         });
 
@@ -131,10 +129,8 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
         imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = getContext();
-                BusquedaFragment.OnFragmentInterface listener = (BusquedaFragment.OnFragmentInterface) context;
-
-                listener.clickCanal("google-news-ar");
+                categoria=8;
+                reemplazarFragment("google-news-ar");
             }
         });
 
@@ -142,10 +138,8 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
         imageView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = getContext();
-                BusquedaFragment.OnFragmentInterface listener = (BusquedaFragment.OnFragmentInterface) context;
-
-                listener.clickCanal("cnn-es");
+                categoria=8;
+                reemplazarFragment("cnn-es");
             }
         });
 
@@ -153,13 +147,11 @@ public class BuscarActivity extends AppCompatActivity implements BusquedaFragmen
         imageView5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = getContext();
-                BusquedaFragment.OnFragmentInterface listener = (BusquedaFragment.OnFragmentInterface) context;
-
-                listener.clickCanal("la-gaceta");
+                categoria=8;
+                reemplazarFragment("la-gaceta");
             }
         });
-        
+
         Fragment selectedFragment = new BusquedaFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.contenedor, selectedFragment);
