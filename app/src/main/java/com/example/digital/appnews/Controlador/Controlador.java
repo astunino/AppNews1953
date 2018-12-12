@@ -1,9 +1,13 @@
 package com.example.digital.appnews.Controlador;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import com.example.digital.appnews.DAO.DAOArchivo;
 import com.example.digital.appnews.DAO.DAOInternet;
 import com.example.digital.appnews.Modelo.Noticia;
 import com.example.digital.appnews.Util.ResultListener;
+import com.example.digital.appnews.Util.Util;
 import com.example.digital.appnews.Vista.NoticiasFragment;
 
 import java.util.ArrayList;
@@ -27,9 +31,8 @@ public class Controlador{
         this.buscar=buscar;
     }
 
-    public void obtenerNoticias(final ResultListener<ArrayList<Noticia>> listenerView){
-
-        if(hayInternet()){
+    public void obtenerNoticias(Context context, final ResultListener<ArrayList<Noticia>> listenerView){
+        if(Util.isOnline(context)){
             DAOInternet daoInternet = new DAOInternet(categoria,buscar);
             daoInternet.obtenerNoticias(new ResultListener<ArrayList<Noticia>>(){
 
@@ -43,10 +46,7 @@ public class Controlador{
         }else{
             DAOArchivo daoArchivo = new DAOArchivo();
             daoArchivo.obtenerListaDeNoticiasDeArchivo();
+            Toast.makeText(context,"No hay conexión internet", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    public Boolean hayInternet() {
-        return true;
     }
 }
