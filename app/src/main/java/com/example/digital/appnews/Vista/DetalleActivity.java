@@ -9,8 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 
 import com.example.digital.appnews.Controlador.Controlador;
 import com.example.digital.appnews.Modelo.Noticia;
@@ -55,7 +53,7 @@ public class DetalleActivity extends AppCompatActivity {
             controlador = new Controlador(String.valueOf(categoria));
         }
 
-        controlador.obtenerNoticias(new ResultListener<ArrayList<Noticia>>() {
+        controlador.obtenerNoticias(this, new ResultListener<ArrayList<Noticia>>() {
             @Override
             public void finish(ArrayList<Noticia> noticias) {
                 // Adapter

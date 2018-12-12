@@ -103,7 +103,8 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
                 break;
         }
 
-        controlador.obtenerNoticias(new ResultListener<ArrayList<Noticia>>() {
+        Context context = getContext();
+        controlador.obtenerNoticias(context, new ResultListener<ArrayList<Noticia>>() {
             @Override
             public void finish(ArrayList<Noticia> noticias) {
                 traerDatos(noticias);
