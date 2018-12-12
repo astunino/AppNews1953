@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.digital.appnews.R;
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
@@ -28,15 +29,12 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class VentanaRegistro extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleApiClient googleApiClient;
-
     private SignInButton signInButton;
 
     public static final int SIGN_IN_CODE = 777;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +50,7 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        signInButton = (SignInButton) findViewById(R.id.botonGoogle);
+        signInButton = findViewById(R.id.botonGoogle);
         signInButton.setSize(SignInButton.SIZE_WIDE);
 
         signInButton.setColorScheme(SignInButton.COLOR_DARK);
@@ -76,7 +74,6 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
             }
         };
 
-
     }
 
     @Override
@@ -94,6 +91,8 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        GoogleSignIn
 
         if (requestCode == SIGN_IN_CODE) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
