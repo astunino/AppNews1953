@@ -82,7 +82,6 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    //goMainScreen();
 
                     textViewNombre.setText(user.getDisplayName());
                     textViewNombre.setVisibility(View.VISIBLE);
@@ -92,6 +91,7 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
                     imageViewFoto.setVisibility(View.VISIBLE);
                     buttonSignOut.setVisibility(View.VISIBLE);
                     signInButton.setVisibility(View.INVISIBLE);
+
                 }
             }
         };
@@ -131,6 +131,7 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
 
     private void handleSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
+            signInButton.setVisibility(View.INVISIBLE);
             firebaseAuthWithGoogle(result.getSignInAccount());
         } else {
             Toast.makeText(this, "No logon", Toast.LENGTH_SHORT).show();
@@ -139,28 +140,19 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount signInAccount) {
 
-
-        signInButton.setVisibility(View.GONE);
-
         AuthCredential credential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-
-                signInButton.setVisibility(View.VISIBLE);
+                Intent mainActivity = new Intent(VentanaRegistro.this, MainActivity.class);
+                startActivity(mainActivity);
 
                 if (!task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "a", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-    }
-
-    private void goMainScreen() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
     }
 
     @Override

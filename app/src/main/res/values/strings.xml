@@ -10,5 +10,6 @@
     <string name="health">Health</string>
     <string name="buscar">Ingrese tema a buscar...</string>
     <string name="signout">Sign out</string>
+    <string name="registrate">Regístrate:</string>
 
 </resources>
