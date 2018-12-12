@@ -1,18 +1,25 @@
 package com.example.digital.appnews.Vista;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.digital.appnews.R;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
@@ -30,7 +37,9 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
 
     private GoogleApiClient googleApiClient;
     private SignInButton signInButton;
-
+    private TextView textViewNombre;
+    private ImageView imageViewFoto;
+    private Button buttonSignOut;
     public static final int SIGN_IN_CODE = 777;
 
     private FirebaseAuth firebaseAuth;
@@ -63,6 +72,9 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
             }
         });
 
+        textViewNombre = findViewById(R.id.textViewNombre);
+        imageViewFoto = findViewById(R.id.imageViewFoto);
+        buttonSignOut = findViewById(R.id.buttonSignOut);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -70,17 +82,35 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    goMainScreen();
+                    //goMainScreen();
+
+                    textViewNombre.setText(user.getDisplayName());
+                    textViewNombre.setVisibility(View.VISIBLE);
+
+                    Uri uri = user.getPhotoUrl();
+                    Glide.with(getApplicationContext()).load(uri).into(imageViewFoto);
+                    imageViewFoto.setVisibility(View.VISIBLE);
+                    buttonSignOut.setVisibility(View.VISIBLE);
+                    signInButton.setVisibility(View.INVISIBLE);
                 }
             }
         };
 
+        buttonSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                textViewNombre.setVisibility(View.INVISIBLE);
+                imageViewFoto.setVisibility(View.INVISIBLE);
+                buttonSignOut.setVisibility(View.INVISIBLE);
+                signInButton.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
         firebaseAuth.addAuthStateListener(firebaseAuthListener);
     }
 
@@ -92,8 +122,6 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        GoogleSignIn
 
         if (requestCode == SIGN_IN_CODE) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
