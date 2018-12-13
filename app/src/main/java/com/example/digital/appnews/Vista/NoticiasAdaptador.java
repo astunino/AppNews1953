@@ -91,14 +91,14 @@ public class NoticiasAdaptador extends RecyclerView.Adapter {
 
         public void bind(Noticia noticia){
 
-            if(noticia.getUrlToImagen()==null){
+            if(noticia.getUrlToImage()==null){
                 imageViewFoto.setImageResource(R.drawable.no_image);
 //                imageViewFoto.setVisibility(View.GONE);
             }else{
-                if(noticia.getUrlToImagen().startsWith("//")){
-                    noticia.setUrlToImagen("http:"+noticia.getUrlToImagen());
+                if(noticia.getUrlToImage().startsWith("//")){
+                    noticia.setUrlToImagen("http:"+noticia.getUrlToImage());
                 }
-                Glide.with(context).load(noticia.getUrlToImagen()).into(imageViewFoto);
+                Glide.with(context).load(noticia.getUrlToImage()).into(imageViewFoto);
   //              imageViewFoto.setVisibility(View.VISIBLE);
             }
 

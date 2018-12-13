@@ -17,7 +17,13 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.example.digital.appnews.Controlador.Controlador;
+import com.example.digital.appnews.DAO.Database.DaoNoticia;
+import com.example.digital.appnews.DAO.Database.DatabaseHelper;
+import com.example.digital.appnews.Modelo.Noticia;
 import com.example.digital.appnews.R;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NoticiasAdaptador.AdapterListener {
 
@@ -47,7 +53,24 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
                                 break;
                             case R.id.navigation_favorito:
                                 tabLayout.setVisibility(View.GONE);
-                                Fragment fragment = new FavoritosFragment();
+
+                                Fragment fragment=null;
+
+                                DaoNoticia daoNoticia = DatabaseHelper
+                                        .getInstance(getApplicationContext())
+                                        .getDaoNoticia();
+
+                                List<Noticia> noticias = daoNoticia.buscarNoticias();
+                                if(noticias.isEmpty()){
+                                    fragment = new FavoritosFragment();
+                                }else{
+                                    fragment = new NoticiasFragment();
+
+                                    Bundle bundle = new Bundle();
+                                    bundle.putInt(NoticiasFragment.KEY_CATEGORIA,9);
+                                    fragment.setArguments(bundle);
+                                }
+
                                 cargarFragment(fragment);
                                 break;
 

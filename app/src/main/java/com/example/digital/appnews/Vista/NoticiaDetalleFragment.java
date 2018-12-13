@@ -17,8 +17,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.digital.appnews.DAO.Database.DaoNoticia;
+import com.example.digital.appnews.DAO.Database.DatabaseHelper;
 import com.example.digital.appnews.Modelo.Noticia;
 import com.example.digital.appnews.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
 
@@ -34,7 +37,7 @@ public class NoticiaDetalleFragment extends Fragment {
     public static final String KEY_IMAGEN = "imagen";
     public static final String KEY_BUSCAR = "buscar";
     private FloatingActionButton imageButtonVerMas, imageButtonFav;
-    private String url;
+    private String url,imagen;
 
     public static NoticiaDetalleFragment fabrica(Noticia dato) {
         NoticiaDetalleFragment fragment = new NoticiaDetalleFragment();
@@ -44,7 +47,7 @@ public class NoticiaDetalleFragment extends Fragment {
         bundle.putString(NoticiaDetalleFragment.KEY_URL, dato.getUrl());
         bundle.putString(NoticiaDetalleFragment.KEY_TITULO, dato.getTitle());
         bundle.putString(NoticiaDetalleFragment.KEY_DESCRIPCION, dato.getContent());
-        bundle.putString(NoticiaDetalleFragment.KEY_IMAGEN, dato.getUrlToImagen());
+        bundle.putString(NoticiaDetalleFragment.KEY_IMAGEN, dato.getUrlToImage());
         fragment.setArguments(bundle);
 
         return fragment;
@@ -64,9 +67,9 @@ public class NoticiaDetalleFragment extends Fragment {
 
         Bundle bundle = getArguments();
         url = bundle.getString(KEY_URL);
-        String titulo = bundle.getString(KEY_TITULO);
-        String descripcion = bundle.getString(KEY_DESCRIPCION);
-        String imagen = bundle.getString(KEY_IMAGEN);
+        final String titulo = bundle.getString(KEY_TITULO);
+        final String descripcion = bundle.getString(KEY_DESCRIPCION);
+        imagen = bundle.getString(KEY_IMAGEN);
 
         ImageView imageViewDetalle = view.findViewById(R.id.imageViewDetalle);
         TextView textViewTitulo = view.findViewById(R.id.textViewTitulo);
@@ -116,10 +119,19 @@ public class NoticiaDetalleFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Snackbar mySnackbar = Snackbar.make(v, "Debe estar logueado para agregar un FAV", Snackbar.LENGTH_LONG);
-                mySnackbar.setAction("ACCEDER", new LoginListener());
-                mySnackbar.show();
+                if(FirebaseAuth.getInstance().getCurrentUser()==null){
+                    Snackbar mySnackbar = Snackbar.make(v, "Debe estar logueado para agregar un FAV", Snackbar.LENGTH_LONG);
+                    mySnackbar.setAction("ACCEDER", new LoginListener());
+                    mySnackbar.show();
+                }else{
+                    DaoNoticia daoNoticia = DatabaseHelper
+                            .getInstance(getContext())
+                            .getDaoNoticia();
 
+                    Noticia noticia = new Noticia(titulo,descripcion,url,imagen);
+
+                    daoNoticia.insertarNoticia(noticia);
+                }
             }
         });
 

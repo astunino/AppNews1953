@@ -1,13 +1,14 @@
 package com.example.digital.appnews.Modelo;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 
-import java.io.IOException;
-import java.io.InputStream;
-
+@Entity
 public class Noticia {
 
+    @PrimaryKey
+    private Integer id;
     private String author;
     private String title;
     private String description;
@@ -17,7 +18,8 @@ public class Noticia {
     private String content;
     private Boolean imageNull=false;
 
-    public Noticia(String author, String title, String description, String url, String urlToImage, String publishedAt, String content) {
+    public Noticia(Integer id,String author, String title, String description, String url, String urlToImage, String publishedAt, String content) {
+        this.id=id;
         this.author = author;
         this.title = title;
         this.description = description;
@@ -27,10 +29,19 @@ public class Noticia {
         this.content = content;
     }
 
+    @Ignore
     public Noticia(String title,String description){
         this.title=title;
         this.description=description;
         this.urlToImage="null";
+    }
+
+    @Ignore
+    public Noticia(String title,String description,String url,String urlToImage){
+        this.title=title;
+        this.description=description;
+        this.url=url;
+        this.urlToImage=urlToImage;
     }
 
     public String getAuthor() {
@@ -65,7 +76,7 @@ public class Noticia {
         this.url = url;
     }
 
-    public String getUrlToImagen() {
+    public String getUrlToImage() {
         return urlToImage;
     }
 
@@ -73,12 +84,8 @@ public class Noticia {
         this.urlToImage = urlToImage;
     }
 
-    public String getpublishedAt() {
+    public String getPublishedAt() {
         return publishedAt;
-    }
-
-    public void setpublishedAt(String publishedAt) {
-        this.publishedAt = publishedAt;
     }
 
     public String getContent() {
@@ -93,5 +100,20 @@ public class Noticia {
         return imageNull;
     }
 
+    public void setPublishedAt(String publishedAt) {
+        this.publishedAt = publishedAt;
+    }
+
+    public void setImageNull(Boolean imageNull) {
+        this.imageNull = imageNull;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
 }

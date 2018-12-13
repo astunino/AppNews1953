@@ -42,9 +42,9 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
     public static final String KEY_HEALTH = "6";
     public static final String KEY_SEARCH = "7";
     public static final String KEY_CANAL = "8";
+    public static final String KEY_FAVORITO = "9";
     public static final String KEY_CATEGORIA = "categoria";
     public static final String KEY_BUSCAR = "buscar";
-
 
     public NoticiasFragment() {
         // Required empty public constructor
@@ -100,6 +100,9 @@ public class NoticiasFragment extends Fragment implements NoticiasAdaptador.Adap
                 break;
             case 8:
                 controlador = new Controlador(KEY_CANAL,buscar);
+                break;
+            case 9:
+                controlador = new Controlador(KEY_FAVORITO);
                 break;
         }
 

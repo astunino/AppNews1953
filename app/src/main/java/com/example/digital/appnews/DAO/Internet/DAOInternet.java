@@ -1,4 +1,4 @@
-package com.example.digital.appnews.DAO;
+package com.example.digital.appnews.DAO.Internet;
 
 import com.example.digital.appnews.Modelo.ContenedorNoticias;
 import com.example.digital.appnews.Modelo.Noticia;

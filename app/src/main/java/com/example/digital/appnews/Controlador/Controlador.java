@@ -4,13 +4,16 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.digital.appnews.DAO.DAOArchivo;
-import com.example.digital.appnews.DAO.DAOInternet;
+import com.example.digital.appnews.DAO.Database.DaoNoticia;
+import com.example.digital.appnews.DAO.Database.DatabaseHelper;
+import com.example.digital.appnews.DAO.Internet.DAOInternet;
 import com.example.digital.appnews.Modelo.Noticia;
 import com.example.digital.appnews.Util.ResultListener;
 import com.example.digital.appnews.Util.Util;
 import com.example.digital.appnews.Vista.NoticiasFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Controlador{
@@ -32,7 +35,16 @@ public class Controlador{
     }
 
     public void obtenerNoticias(Context context, final ResultListener<ArrayList<Noticia>> listenerView){
-        if(Util.isOnline(context)){
+
+        if(categoria==NoticiasFragment.KEY_FAVORITO){
+            DaoNoticia daoNoticia = DatabaseHelper
+                    .getInstance(context.getApplicationContext())
+                    .getDaoNoticia();
+
+            List<Noticia> noticias = daoNoticia.buscarNoticias();
+            listenerView.finish((ArrayList<Noticia>) noticias);
+
+        }else if(Util.isOnline(context)){
             DAOInternet daoInternet = new DAOInternet(categoria,buscar);
             daoInternet.obtenerNoticias(new ResultListener<ArrayList<Noticia>>(){
 
