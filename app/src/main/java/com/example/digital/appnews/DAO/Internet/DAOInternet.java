@@ -1,5 +1,6 @@
 package com.example.digital.appnews.DAO.Internet;
 
+import com.example.digital.appnews.DAO.DaoHelper;
 import com.example.digital.appnews.Modelo.ContenedorNoticias;
 import com.example.digital.appnews.Modelo.Noticia;
 import com.example.digital.appnews.Util.ResultListener;
