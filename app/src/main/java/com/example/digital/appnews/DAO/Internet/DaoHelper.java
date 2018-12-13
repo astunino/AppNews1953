@@ -1,4 +1,4 @@
-package com.example.digital.appnews.DAO;
+package com.example.digital.appnews.DAO.Internet;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

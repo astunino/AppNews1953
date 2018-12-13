@@ -18,6 +18,7 @@ public class Noticia {
     private String content;
     private Boolean imageNull=false;
 
+    @Ignore
     public Noticia(Integer id,String author, String title, String description, String url, String urlToImage, String publishedAt, String content) {
         this.id=id;
         this.author = author;
@@ -36,7 +37,6 @@ public class Noticia {
         this.urlToImage="null";
     }
 
-    @Ignore
     public Noticia(String title,String description,String url,String urlToImage){
         this.title=title;
         this.description=description;

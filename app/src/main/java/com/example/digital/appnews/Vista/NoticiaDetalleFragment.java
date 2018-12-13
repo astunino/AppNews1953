@@ -25,6 +25,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
 
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -37,7 +39,7 @@ public class NoticiaDetalleFragment extends Fragment {
     public static final String KEY_IMAGEN = "imagen";
     public static final String KEY_BUSCAR = "buscar";
     private FloatingActionButton imageButtonVerMas, imageButtonFav;
-    private String url,imagen;
+    private String titulo,descripcion,url,imagen;
 
     public static NoticiaDetalleFragment fabrica(Noticia dato) {
         NoticiaDetalleFragment fragment = new NoticiaDetalleFragment();
@@ -67,8 +69,8 @@ public class NoticiaDetalleFragment extends Fragment {
 
         Bundle bundle = getArguments();
         url = bundle.getString(KEY_URL);
-        final String titulo = bundle.getString(KEY_TITULO);
-        final String descripcion = bundle.getString(KEY_DESCRIPCION);
+        titulo = bundle.getString(KEY_TITULO);
+        descripcion = bundle.getString(KEY_DESCRIPCION);
         imagen = bundle.getString(KEY_IMAGEN);
 
         ImageView imageViewDetalle = view.findViewById(R.id.imageViewDetalle);
@@ -89,6 +91,16 @@ public class NoticiaDetalleFragment extends Fragment {
         }
 
         textViewTitulo.setText(titulo);
+
+        DaoNoticia daoNoticia = DatabaseHelper
+                .getInstance(getContext())
+                .getDaoNoticia();
+
+        Noticia noticiaExiste=daoNoticia.buscarNoticiaTitulo(titulo);
+        if(noticiaExiste!=null){
+            imageButtonFav.setImageResource(R.drawable.heartred);
+            descripcion=noticiaExiste.getDescription();
+        }
 
         String part1 = ""; //se inicializa esta variable ya que puede no ser sobreescrita si no se entra al if de la siguiente línea
         if (descripcion != null) { //La noticia puede no tener descripción. Este if, previene esa situación.
@@ -121,7 +133,7 @@ public class NoticiaDetalleFragment extends Fragment {
 
                 if(FirebaseAuth.getInstance().getCurrentUser()==null){
                     Snackbar mySnackbar = Snackbar.make(v, "Debe estar logueado para agregar un FAV", Snackbar.LENGTH_LONG);
-                    mySnackbar.setAction("ACCEDER", new LoginListener());
+                    mySnackbar.setAction("LOG IN", new LoginListener());
                     mySnackbar.show();
                 }else{
                     DaoNoticia daoNoticia = DatabaseHelper
@@ -129,8 +141,21 @@ public class NoticiaDetalleFragment extends Fragment {
                             .getDaoNoticia();
 
                     Noticia noticia = new Noticia(titulo,descripcion,url,imagen);
+                    List<Noticia> noticias = daoNoticia.buscarNoticias();
 
-                    daoNoticia.insertarNoticia(noticia);
+                    Noticia noticiaExiste=daoNoticia.buscarNoticiaTitulo(titulo);
+
+                    if(noticiaExiste!=null){
+                        daoNoticia.borrarNoticia(titulo);
+                        imageButtonFav.setImageResource(R.drawable.heart);
+                        Snackbar mySnackbar = Snackbar.make(v, "Se eliminó la noticia de FAVORITOS", Snackbar.LENGTH_LONG);
+                        mySnackbar.show();
+                    }else{
+                        imageButtonFav.setImageResource(R.drawable.heartred);
+                        daoNoticia.insertarNoticia(noticia);
+                        Snackbar mySnackbar = Snackbar.make(v, "Se agregó la noticia a FAVORITOS", Snackbar.LENGTH_LONG);
+                        mySnackbar.show();
+                    }
                 }
             }
         });

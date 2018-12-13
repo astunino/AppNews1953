@@ -22,6 +22,7 @@ import com.example.digital.appnews.DAO.Database.DaoNoticia;
 import com.example.digital.appnews.DAO.Database.DatabaseHelper;
 import com.example.digital.appnews.Modelo.Noticia;
 import com.example.digital.appnews.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -61,11 +62,10 @@ public class MainActivity extends AppCompatActivity implements NoticiasAdaptador
                                         .getDaoNoticia();
 
                                 List<Noticia> noticias = daoNoticia.buscarNoticias();
-                                if(noticias.isEmpty()){
+                                if(noticias.isEmpty()|| FirebaseAuth.getInstance().getCurrentUser()==null){
                                     fragment = new FavoritosFragment();
                                 }else{
                                     fragment = new NoticiasFragment();
-
                                     Bundle bundle = new Bundle();
                                     bundle.putInt(NoticiasFragment.KEY_CATEGORIA,9);
                                     fragment.setArguments(bundle);

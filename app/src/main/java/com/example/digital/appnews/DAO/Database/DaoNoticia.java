@@ -1,6 +1,7 @@
 package com.example.digital.appnews.DAO.Database;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
@@ -20,5 +21,11 @@ public interface DaoNoticia {
 
     @Query("SELECT * FROM Noticia")
     List<Noticia> buscarNoticias();
+
+    @Query("SELECT * FROM Noticia WHERE title LIKE:titulo")
+    Noticia buscarNoticiaTitulo(String titulo);
+
+    @Query("DELETE FROM Noticia WHERE title LIKE:titulo")
+    void borrarNoticia(String titulo);
 
 }

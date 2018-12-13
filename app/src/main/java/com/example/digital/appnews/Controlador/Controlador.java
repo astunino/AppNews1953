@@ -36,7 +36,7 @@ public class Controlador{
 
     public void obtenerNoticias(Context context, final ResultListener<ArrayList<Noticia>> listenerView){
 
-        if(categoria==NoticiasFragment.KEY_FAVORITO){
+        if(categoria.equals(NoticiasFragment.KEY_FAVORITO)){
             DaoNoticia daoNoticia = DatabaseHelper
                     .getInstance(context.getApplicationContext())
                     .getDaoNoticia();

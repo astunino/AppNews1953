@@ -42,7 +42,6 @@ public class DetalleActivity extends AppCompatActivity {
         buscar = bundle.getString(NoticiaDetalleFragment.KEY_BUSCAR);
 
         viewPager = findViewById(R.id.viewPager);
-
         imageButtonVerMas = findViewById(R.id.imageButtonVerMas);
 
         final ArrayList<Noticia> noticias = new ArrayList<>();
