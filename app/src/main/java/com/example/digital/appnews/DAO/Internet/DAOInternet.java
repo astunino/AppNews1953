@@ -1,10 +1,6 @@
 package com.example.digital.appnews.DAO.Internet;
 
-<<<<<<< Updated upstream
-
-=======
 import com.example.digital.appnews.DAO.Internet.DaoHelper;
->>>>>>> Stashed changes
 import com.example.digital.appnews.Modelo.ContenedorNoticias;
 import com.example.digital.appnews.Modelo.Noticia;
 import com.example.digital.appnews.Util.ResultListener;
