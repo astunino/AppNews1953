@@ -121,6 +121,12 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
 
     }
 
+    public void onBackPressed(){
+        Intent mainActivity = new Intent(VentanaRegistro.this, MainActivity.class);
+        startActivity(mainActivity);
+
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
