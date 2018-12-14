@@ -112,6 +112,8 @@ public class VentanaRegistro extends AppCompatActivity implements GoogleApiClien
                 imageViewFoto.setVisibility(View.INVISIBLE);
                 buttonSignOut.setVisibility(View.INVISIBLE);
                 signInButton.setVisibility(View.VISIBLE);
+                Intent mainActivity = new Intent(VentanaRegistro.this, MainActivity.class);
+                startActivity(mainActivity);
             }
         });
 
