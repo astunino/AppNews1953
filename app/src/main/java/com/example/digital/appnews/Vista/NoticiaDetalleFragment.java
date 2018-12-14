@@ -97,7 +97,7 @@ public class NoticiaDetalleFragment extends Fragment {
                 .getDaoNoticia();
 
         Noticia noticiaExiste=daoNoticia.buscarNoticiaTitulo(titulo);
-        if(noticiaExiste!=null){
+        if(noticiaExiste!=null&&FirebaseAuth.getInstance().getCurrentUser()!=null){
             imageButtonFav.setImageResource(R.drawable.heartred);
             descripcion=noticiaExiste.getDescription();
         }
