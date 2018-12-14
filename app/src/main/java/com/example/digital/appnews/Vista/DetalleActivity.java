@@ -24,6 +24,7 @@ public class DetalleActivity extends AppCompatActivity {
     private String titulo,buscar;
     private Integer categoria;
     private String url;
+    private ArrayList<Noticia> noticiasList;
     private Controlador controlador;
 
     @Override
@@ -44,7 +45,7 @@ public class DetalleActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         imageButtonVerMas = findViewById(R.id.imageButtonVerMas);
 
-        final ArrayList<Noticia> noticias = new ArrayList<>();
+        noticiasList = new ArrayList<>();
 
         if(categoria==7||categoria==8){
             controlador = new Controlador(String.valueOf(categoria),buscar);
@@ -58,6 +59,7 @@ public class DetalleActivity extends AppCompatActivity {
                 // Adapter
                 ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), noticias);
                 viewPager.setAdapter(adapter);
+                noticiasList=noticias;
 
                 int posicion=0;
 
@@ -83,9 +85,10 @@ public class DetalleActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.app_bar_share:
+                Noticia noticia = noticiasList.get(viewPager.getCurrentItem());
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "Mirate esta nota en Noticias Now -> " + titulo +"->"+url);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "Mirate esta nota en Noticias Now -> " + noticia.getTitle() +"->"+noticia.getUrl());
                 sendIntent.setType("text/plain");
                 sendIntent.setPackage("com.whatsapp");
                 startActivity(sendIntent);
