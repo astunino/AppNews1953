@@ -12,13 +12,8 @@
         android:id="@+id/imageViewPresentacion"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:padding="40dp"
         android:src="@drawable/screen"
-        android:scaleType="centerCrop"/>
+        android:scaleType="center"/>
 
-
- >
 </FrameLayout>
