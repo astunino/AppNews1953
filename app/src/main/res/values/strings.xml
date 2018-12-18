@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppNews</string>
+    <string name="app_name">News Now</string>
     <string name="favoritos">Mis noticias favoritas</string>
     <string name="nohayfavoritos">No hay favoritos</string>
     <string name="sports">Sports</string>
